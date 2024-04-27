@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ScriptForWorkNumber1 : MonoBehaviour
 {
-    // Start is called before the first frame update
+    
     void Start()
     {
-        
+        //Einz, zwei, frei       
     }
 
     // Update is called once per frame
