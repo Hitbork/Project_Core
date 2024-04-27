@@ -7,7 +7,8 @@ public class ScriptForWorkNumber1 : MonoBehaviour
     
     void Start()
     {
-        //Einz, zwei, frei       
+        //Einz, zwei, frei
+        //asdasd       
     }
 
     // Update is called once per frame
