@@ -44,7 +44,8 @@ public class LevelManager : MonoBehaviour
                 if (temp != null)
                 {
                     levelData.tiles.Add(temptile.id);
-                    levelData.poses.Add(new Vector3Int(x, y, 0));
+                    levelData.poses_x.Add(x);
+                    levelData.poses_y.Add(y);
                 }
             }
         }
@@ -60,9 +61,9 @@ public class LevelManager : MonoBehaviour
 
         tilemap.ClearAllTiles();
 
-        for (int i = 0; i < data.poses.Count; i++)
+        for (int i = 0; i < data.tiles.Count; i++)
         {
-            tilemap.SetTile(data.poses[i], tiles.Find(t => t.name == data.tiles[i]).tile);
+            tilemap.SetTile(new Vector3Int(data.poses_x[i], data.poses_y[i], 0), tiles.Find(t => t.name == data.tiles[i]).tile);
         }
 
         Debug.Log("Level loaded");
@@ -72,5 +73,6 @@ public class LevelManager : MonoBehaviour
 public class LevelData
 {
     public List<string> tiles = new List<string>();
-    public List<Vector3Int> poses = new List<Vector3Int>();
+    public List<int> poses_x = new List<int>();
+    public List<int> poses_y = new List<int>();
 }
