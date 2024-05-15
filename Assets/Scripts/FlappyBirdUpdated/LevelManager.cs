@@ -8,7 +8,6 @@ using System.IO;
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
-    public List<CustomTile> tiles = new List<CustomTile>();
 
     // Using awake, because it's always called before Start() functions
     // So we may use LevelManager.cs script to set up references between another scripts
@@ -18,6 +17,7 @@ public class LevelManager : MonoBehaviour
         else Destroy(this);
     }
 
+    public List<CustomTile> tiles = new List<CustomTile>();
     public Tilemap tilemap;
 
     private void Update()

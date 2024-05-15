@@ -9,9 +9,17 @@ public class LevelEditor : MonoBehaviour
     
     // Using TileBase instead of Tile in case we may
     // use TileRule types of tiles in the future
-    [SerializeField] TileBase currentTile;
+    TileBase currentTile 
+    {
+        get 
+        {
+            return LevelManager.instance.tiles[_selectedTileIndex].tile;
+        }
+    }
 
     [SerializeField] Camera cam;
+    
+    int _selectedTileIndex;     
 
     private void Update()
     {
