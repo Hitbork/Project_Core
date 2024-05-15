@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tile: {fileID: 11400000, guid: de486fe804d2dc647845caefa2b7415c, type: 2}
   id: DirtWithGrass
+  tilemap: 30
