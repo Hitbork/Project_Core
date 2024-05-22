@@ -14,7 +14,7 @@ public class LevelStatusManager : MonoBehaviour
 
     public void TurnOnTestableMode()
     {
-        GameObject.FindGameObjectWithTag("Camera").GetComponent<CameraScript>().Invoke();
+        //  GameObject.FindGameObjectWithTag("Camera").GetComponent<CameraScript>().Invoke();
     }
 
     public void TurnOffTestableMode()
