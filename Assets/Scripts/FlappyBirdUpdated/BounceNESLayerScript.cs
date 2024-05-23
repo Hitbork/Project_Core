@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BounceNESLayerScript : MonoBehaviour
 {
-    public Rigidbody2D birdRigidBody;
+    public Rigidbody2D birdRigidBody = null;
     private string layerName;
     
     private void Start()
@@ -33,6 +33,11 @@ public class BounceNESLayerScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (birdRigidBody == null)
+        {
+            SetRigidbody();
+        }
+
         Vector2Int tempVector = new Vector2Int(0, 0);
 
         // Defining the direction of vector
