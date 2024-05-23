@@ -36,9 +36,16 @@ public class LevelManager : MonoBehaviour
     {
         Sky = 10,
         Background = 20,
-        BounceLeft = 25,
-        BounceRight = 25,
-        Ground = 30
+        BounceNESUp = 25,
+        BounceNESUpRight = 26,
+        BounceNESRight = 27,
+        BounceNESDownRight = 28,
+        BounceNESDown = 29,
+        BounceNESDownLeft = 30,
+        BounceNESLeft = 31,
+        BounceNESUpLeft = 32,
+        BounceRight = 33,
+        Ground = 50
     }
 
     private void Update()

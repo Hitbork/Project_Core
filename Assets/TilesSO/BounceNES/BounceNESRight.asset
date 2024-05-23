@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad0bda4b9e4fd534b84799128be69dff, type: 3}
-  m_Name: BounceRightTile
+  m_Name: BounceNESRight
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: 05eb8373cde7d3948bcf469a82e4d6ae, type: 2}
-  id: BounceRightTile
-  tilemap: 25
+  tile: {fileID: 11400000, guid: 0093f13f48b3cd24dad4ba4d67cd8409, type: 2}
+  id: BounceNESRight
+  tilemap: 27

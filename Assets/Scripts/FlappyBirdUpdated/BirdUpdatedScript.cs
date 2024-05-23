@@ -21,29 +21,22 @@ public class BirdUpdatedScript : MonoBehaviour
     {
         if (myRigidBody2D.velocity.x > 5.0f && birdIsAlive)
         {
-            myRigidBody2D.velocity -= Vector2.left * 0.1f;
-        }
-        
-        if (myRigidBody2D.velocity.x < 5.0f && birdIsAlive)
-        {
-            myRigidBody2D.velocity += Vector2.right * 0.1f;
+            myRigidBody2D.velocity -= Vector2.left * 2f * Time.deltaTime;
         }
 
+        if (myRigidBody2D.velocity.x < 5.0f && birdIsAlive)
+        {
+            myRigidBody2D.velocity += Vector2.right * 2f * Time.deltaTime;
+        }
+        
         if (Input.GetKeyDown(KeyCode.Space) && birdIsAlive)
         {
             myRigidBody2D.velocity += Vector2.up * 5;
         }
     }
-
-    public void Bounce(float bounceX, float bounceY)
-    {
-        myRigidBody2D.velocity += Vector2.left * bounceX;
-        myRigidBody2D.velocity += Vector2.up * bounceY;
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag != "BounceLayer")
+        if (collision.gameObject.tag == "GroundLayer")
         {
             logic.gameOver();
             birdIsAlive = false;

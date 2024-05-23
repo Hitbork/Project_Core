@@ -4,21 +4,31 @@ using UnityEngine;
 
 public class CameraScript : MonoBehaviour
 {
-    private Transform player;
+    private Transform player = null;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        try
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+        catch
+        {
+            Debug.Log("Camera hasn't found the player");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 temp = transform.position;
-        temp.x = player.position.x;
-        temp.y = player.position.y;
+        if (player != null)
+        {
+            Vector3 temp = transform.position;
+            temp.x = player.position.x;
+            temp.y = player.position.y;
 
-        transform.position = temp;
+            transform.position = temp;
+        }
     }
 }
