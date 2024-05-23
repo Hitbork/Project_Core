@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tile: {fileID: 11400000, guid: e9ddaa08eba3b5941856d80e51eb39cf, type: 2}
   id: WallRT
-  tilemap: 20
+  tilemap: 50

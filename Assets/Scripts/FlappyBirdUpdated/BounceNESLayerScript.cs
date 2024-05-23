@@ -25,7 +25,7 @@ public class BounceNESLayerScript : MonoBehaviour
         }
         // Catching the error because gameobject 
         // tagged player may be set unactive
-        catch (Exception ex)
+        catch
         {
             Debug.Log("BounceNESLayer couldn't find the bird");
         }

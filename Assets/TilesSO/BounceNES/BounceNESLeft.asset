@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad0bda4b9e4fd534b84799128be69dff, type: 3}
-  m_Name: Dirt
+  m_Name: BounceNESLeft
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: 8d6f378663f1a7448962dcdd727a4944, type: 2}
-  id: Dirt
-  tilemap: 10
+  tile: {fileID: 11400000, guid: d2c81206cf6c6604980b14a9d0e763cd, type: 2}
+  id: BounceNESLeft
+  tilemap: 31
