@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class LevelStatusManager : MonoBehaviour
 {
-    public GameObject player;
     private LevelEditor levelEditor;
 
     [SerializeField]
     List<GameObject> gameObjectsForEditingToSetActive, gameObjectsForTestingToSetActive, gameObjectsForEditingToInstantiate, gameObjectsForTestingToInstantiate;
 
-    private List<string> namesOfObjectsToDestroy;
+    private List<string> tagsOfObjectsToDestroy = new List<string>();
 
     private void Awake()
     {
@@ -27,9 +26,9 @@ public class LevelStatusManager : MonoBehaviour
     public void TurnOnTestableMode()
     {
         DestroyingObjects();
-        InstatiatingObjects(gameObjectsForTestingToInstantiate);
         levelEditor.enabled = false;
         SetActiveForEditing(false);
+        InstatiatingObjects(gameObjectsForTestingToInstantiate);
     }
 
     public void TurnOnEditingMode()
@@ -37,39 +36,41 @@ public class LevelStatusManager : MonoBehaviour
         DestroyingObjects();
         InstatiatingObjects(gameObjectsForEditingToInstantiate);
         levelEditor.enabled = true;
-
         SetActiveForEditing(true);
     }
 
     public void DestroyingObjects()
     {
-        foreach (string name in namesOfObjectsToDestroy)
+        foreach (string name in tagsOfObjectsToDestroy)
         {
-            Destroy(GameObject.Find(name));
+            Destroy(GameObject.FindGameObjectWithTag(name));
         }
-
-        namesOfObjectsToDestroy.Clear();
+        
+        tagsOfObjectsToDestroy.Clear();
     }
 
     public void InstatiatingObjects(List<GameObject> gameObjects)
     {
-        foreach (GameObject gamaObject in gameObjects)
+        foreach (GameObject currentGameObject in gameObjects)
         {
-            Instantiate(gamaObject, new Vector3(0, 0, 0), transform.rotation);
-            namesOfObjectsToDestroy.Add(gameObject.name);
+            if (!currentGameObject.CompareTag("MainCamera"))
+                Instantiate(currentGameObject, new Vector3(0, 0, 0), transform.rotation);
+            else
+                Instantiate(currentGameObject, new Vector3(0, 0, -1), transform.rotation);
+            tagsOfObjectsToDestroy.Add(currentGameObject.tag);
         }
     }
 
     private void SetActiveForEditing(bool boolean)
     {
-        foreach (GameObject gameObject in gameObjectsForTestingToSetActive)
+        foreach (GameObject currentGameObject in gameObjectsForTestingToSetActive)
         {
-            gameObject.SetActive(!boolean);
+            currentGameObject.SetActive(!boolean);
         }
 
-        foreach (GameObject gameObject in gameObjectsForEditingToSetActive)
+        foreach (GameObject currentGameObject in gameObjectsForEditingToSetActive)
         {
-            gameObject.SetActive(boolean);
+            currentGameObject.SetActive(boolean);
         }
     }
 }

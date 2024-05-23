@@ -9,6 +9,9 @@ TagManager:
   - BounceLayer
   - BounceNESLayer
   - GroundLayer
+  - LevelStatusManger
+  - Undefined
+  - LevelStatusManager
   layers:
   - Default
   - TransparentFX
