@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.EventSystems;
 
 public class LevelEditor : MonoBehaviour
 {
@@ -54,13 +55,16 @@ public class LevelEditor : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S)) MovingCamera("down");
 
         // Scaling camera options
-        if (Input.GetKeyDown(KeyCode.F)) ScalingCamera(true);
-        if (Input.GetKeyDown(KeyCode.G)) ScalingCamera(false);
+        if (Input.GetKeyDown(KeyCode.F)) ScalingCamera(-2);
+        if (Input.GetKeyDown(KeyCode.G)) ScalingCamera(2);
         
-        // Placing tile /w LMB
-        if (Input.GetMouseButton(0)) PlaceTile(pos);
-        // Deleting tile /w RMB
-        if (Input.GetMouseButton(1)) DeleteTile(pos);
+        if (!EventSystem.current.IsPointerOverGameObject())
+        {
+            // Placing tile /w LMB
+            if (Input.GetMouseButton(0)) PlaceTile(pos);
+            // Deleting tile /w RMB
+            if (Input.GetMouseButton(1)) DeleteTile(pos);
+        }
         
         // Selecting next tile in the list by pressing plus btn
         if (Input.GetKeyDown(KeyCode.Plus) || Input.GetKeyDown(KeyCode.KeypadPlus)) {
@@ -77,19 +81,20 @@ public class LevelEditor : MonoBehaviour
         }
     }
 
-    private void ScalingCamera(bool isScalingUp)
+    public void ScalingCamera(int scalingNumber)
     {
-        var cameraSize = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().orthographicSize;
-        if (isScalingUp)
-            cameraSize += 2;
-        else
-            cameraSize -= 2;
-        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().orthographicSize = cameraSize;
+        var cameraSize = cam.GetComponent<Camera>().orthographicSize;
+
+        // if not (( camera size is minimal and trying to scale it down) or
+        //  ( if camera size is maximum and trying to scale it up))
+        if (!((cameraSize == 4 && scalingNumber < 0) ||
+               (cameraSize == 40 && scalingNumber > 0)))
+            cam.GetComponent<Camera>().orthographicSize += scalingNumber;
     }
 
-    private void MovingCamera(string direction)
+    public void MovingCamera(string direction)
     {
-        var cameraPosition = GameObject.FindGameObjectWithTag("MainCamera").transform.position;
+        var cameraPosition = cam.transform.position;
 
         switch (direction)
         {
@@ -110,7 +115,7 @@ public class LevelEditor : MonoBehaviour
                 break;
         }
 
-        GameObject.FindGameObjectWithTag("MainCamera").transform.position = cameraPosition;
+        cam.transform.position = cameraPosition;
     }
 
     void PlaceTile(Vector3Int pos)
