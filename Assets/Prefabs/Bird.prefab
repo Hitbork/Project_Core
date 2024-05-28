@@ -138,7 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myRigidBody2D: {fileID: 3469552578839017484}
   transformOfBird: {fileID: 3469552578839017490}
-  multiplierToRotation: 2
+  multiplierToRotation: 30
   speed: 5
   multiplierToVelocity: 2
   logic: {fileID: 0}

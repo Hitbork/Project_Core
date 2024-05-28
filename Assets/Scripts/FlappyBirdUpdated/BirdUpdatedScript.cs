@@ -23,12 +23,12 @@ public class BirdUpdatedScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float angleOfBird = transformOfBird.rotation.z;
+        float angleOfBird = transformOfBird.rotation.eulerAngles.z;
         if (isRotatingBack)
         {
             if (angleOfBird != 0)
             {
-                var trans = transformOfBird.rotation;
+                var trans = transformOfBird.rotation.eulerAngles;
                 if (angleOfBird <= 180 && angleOfBird >= 0)
                 {
                     if (angleOfBird <= multiplierToRotation)
@@ -41,7 +41,7 @@ public class BirdUpdatedScript : MonoBehaviour
                 }
                 else
                 {
-                    if (angleOfBird >= multiplierToRotation * (-1))
+                    if (angleOfBird >= 360 - multiplierToRotation)
                     {
                         angleOfBird = 0;
                         isRotatingBack = false;
@@ -50,13 +50,15 @@ public class BirdUpdatedScript : MonoBehaviour
                         angleOfBird += multiplierToRotation * Time.deltaTime;
                 }
                 trans.z = angleOfBird;
-                transformOfBird.rotation = trans;
+                transformOfBird.rotation = Quaternion.Euler(trans.x, trans.y, trans.z);
             }
+            Debug.Log("Rotating");
         }
         else
         {
-            if (angleOfBird >= 100 || angleOfBird <= 100)
+            if (angleOfBird >= 160 && angleOfBird <= 200)
                 isRotatingBack = true;
+            Debug.Log("UNTI");
         }
 
         if (myRigidBody2D.velocity.x > 5.0f && birdIsAlive)
