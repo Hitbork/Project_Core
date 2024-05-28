@@ -19,7 +19,8 @@ public class LogicScript : MonoBehaviour
 
     public void restartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (SceneManager.GetActiveScene().name != "FlappyBirdUpdated")
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void gameOver()
