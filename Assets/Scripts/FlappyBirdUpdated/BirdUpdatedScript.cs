@@ -57,7 +57,10 @@ public class BirdUpdatedScript : MonoBehaviour
         else
         {
             if (angleOfBird >= 160 && angleOfBird <= 200)
+            {
+                myRigidBody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
                 isRotatingBack = true;
+            }
             Debug.Log("UNTI");
         }
 
