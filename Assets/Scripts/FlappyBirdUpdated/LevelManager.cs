@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 using System.Linq;
 using System.IO;
 using TMPro;
@@ -17,6 +18,8 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] TMP_Text errorField;
     [SerializeField] GameObject errorUI;
+
+    [SerializeField] Image selectedTileImage; 
 
     // Using awake, because it's always called before Start() functions
     // So we may use LevelManager.cs script to set up references between another scripts
@@ -116,12 +119,6 @@ public class LevelManager : MonoBehaviour
         errorField.text = $"'{errMessage}'"; 
         errorUI.SetActive(true);
     }
-
-    private void SetLevelName(string insertedName)
-    {
-        levelData.levelName.Value = insertedName;
-    }
-
     void SaveLevel()
     {
         ChangeUILevelData();
@@ -165,7 +162,7 @@ public class LevelManager : MonoBehaviour
 
         // Save the data as json
         string json = JsonUtility.ToJson(levelInfo, true);
-        File.WriteAllText(Application.dataPath + $"/LevelsOfUsers/{levelData.levelName.Value}.json", json);
+        File.WriteAllText(Application.dataPath + $"/LevelsOfUser/{levelData.levelName.Value}.json", json);
 
         loadLevelButton.SetActive(true);
 
@@ -175,7 +172,7 @@ public class LevelManager : MonoBehaviour
     void LoadLevel()
     {
         // Load the json file to a leveldata
-        string json = File.ReadAllText(Application.dataPath + $"/LevelsOfUsers/{levelData.levelName.Value}.json");
+        string json = File.ReadAllText(Application.dataPath + $"/LevelsOfUser/{levelData.levelName.Value}.json");
         LevelInfo levelInfo = JsonUtility.FromJson<LevelInfo>(json);
 
         foreach (var data in levelInfo.layers)

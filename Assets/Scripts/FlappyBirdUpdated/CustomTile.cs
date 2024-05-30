@@ -7,6 +7,7 @@ using UnityEngine.Tilemaps;
 public class CustomTile : ScriptableObject
 {
     public TileBase tile;
+    public Sprite sprite;
     public string id;
     public LevelManager.Tilemaps tilemap;
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class LevelEditor : MonoBehaviour
@@ -36,6 +37,8 @@ public class LevelEditor : MonoBehaviour
     }
 
     [SerializeField] Camera cam;
+    [SerializeField] Image currentTileImage;
+    [SerializeField] GameObject savingLevelUI;
     
     int _selectedTileIndex;
 
@@ -43,42 +46,59 @@ public class LevelEditor : MonoBehaviour
     {
         if (instance == null) instance = this;
         else Destroy(this);
+
+        ChangeCurrentUITileImage();
     }
     private void Update()
     {
         Vector3Int pos = currentTilemap.WorldToCell(cam.ScreenToWorldPoint(Input.mousePosition));
 
-        // Moving camera options
-        if (Input.GetKeyDown(KeyCode.D)) MovingCamera("right");
-        if (Input.GetKeyDown(KeyCode.A)) MovingCamera("left");
-        if (Input.GetKeyDown(KeyCode.W)) MovingCamera("up");
-        if (Input.GetKeyDown(KeyCode.S)) MovingCamera("down");
-
-        // Scaling camera options
-        if (Input.GetKeyDown(KeyCode.F)) ScalingCamera(-2);
-        if (Input.GetKeyDown(KeyCode.G)) ScalingCamera(2);
-        
-        if (!EventSystem.current.IsPointerOverGameObject())
+        if (!savingLevelUI.activeSelf)
         {
-            // Placing tile /w LMB
-            if (Input.GetMouseButton(0)) PlaceTile(pos);
-            // Deleting tile /w RMB
-            if (Input.GetMouseButton(1)) DeleteTile(pos);
-        }
+            // Moving camera options
+            if (Input.GetKeyDown(KeyCode.D)) MovingCamera("right");
+            if (Input.GetKeyDown(KeyCode.A)) MovingCamera("left");
+            if (Input.GetKeyDown(KeyCode.W)) MovingCamera("up");
+            if (Input.GetKeyDown(KeyCode.S)) MovingCamera("down");
+
+            // Scaling camera options
+            if (Input.GetKeyDown(KeyCode.F)) ScalingCamera(-2);
+            if (Input.GetKeyDown(KeyCode.G)) ScalingCamera(2);
         
-        // Selecting next tile in the list by pressing plus btn
-        if (Input.GetKeyDown(KeyCode.Plus) || Input.GetKeyDown(KeyCode.KeypadPlus)) {
-            _selectedTileIndex++;
-            if (_selectedTileIndex >= LevelManager.instance.tiles.Count) _selectedTileIndex = 0;
-            Debug.Log($"Selected tile: {LevelManager.instance.tiles[_selectedTileIndex].name}");
-        }
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                // Placing tile /w LMB
+                if (Input.GetMouseButton(0)) PlaceTile(pos);
+                // Deleting tile /w RMB
+                if (Input.GetMouseButton(1)) DeleteTile(pos);
+            }
+
+            // Selecting next tile in the list by pressing plus btn
+            if (Input.GetKeyDown(KeyCode.Plus) || Input.GetKeyDown(KeyCode.KeypadPlus)) SelectNextTile();
         
-        // Selecting previous tile in the list by pressing plus btn
-        if (Input.GetKeyDown(KeyCode.Minus) || Input.GetKeyDown(KeyCode.KeypadMinus)) {
-            _selectedTileIndex--;
-            if (_selectedTileIndex < 0) _selectedTileIndex = LevelManager.instance.tiles.Count - 1;
-            Debug.Log($"Selected tile: {LevelManager.instance.tiles[_selectedTileIndex].name}");
+            // Selecting previous tile in the list by pressing plus btn
+            if (Input.GetKeyDown(KeyCode.Minus) || Input.GetKeyDown(KeyCode.KeypadMinus)) SelectPreviousTile();
         }
+    }
+
+    public void SelectNextTile()
+    {
+        _selectedTileIndex++;
+        if (_selectedTileIndex >= LevelManager.instance.tiles.Count) _selectedTileIndex = 0;
+        ChangeCurrentUITileImage();
+        Debug.Log($"Selected tile: {LevelManager.instance.tiles[_selectedTileIndex].name}");
+    }
+    public void SelectPreviousTile()
+    {
+        _selectedTileIndex--;
+        if (_selectedTileIndex < 0) _selectedTileIndex = LevelManager.instance.tiles.Count - 1;
+        ChangeCurrentUITileImage();
+        Debug.Log($"Selected tile: {LevelManager.instance.tiles[_selectedTileIndex].name}");
+    }
+
+    public void ChangeCurrentUITileImage()
+    {
+        currentTileImage.sprite = LevelManager.instance.tiles[_selectedTileIndex].sprite;
     }
 
     public void ScalingCamera(int scalingNumber)

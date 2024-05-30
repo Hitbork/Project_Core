@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dirt
   m_EditorClassIdentifier: 
   tile: {fileID: 11400000, guid: 8d6f378663f1a7448962dcdd727a4944, type: 2}
+  sprite: {fileID: 2099569724, guid: b425613db706e0a49821a35253ec9db1, type: 3}
   id: Dirt
   tilemap: 10

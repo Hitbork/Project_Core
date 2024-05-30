@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: BounceNESRight
   m_EditorClassIdentifier: 
   tile: {fileID: 11400000, guid: 0093f13f48b3cd24dad4ba4d67cd8409, type: 2}
+  sprite: {fileID: -1299178441, guid: b425613db706e0a49821a35253ec9db1, type: 3}
   id: BounceNESRight
   tilemap: 27

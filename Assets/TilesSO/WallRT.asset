@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: WallRT
   m_EditorClassIdentifier: 
   tile: {fileID: 11400000, guid: e9ddaa08eba3b5941856d80e51eb39cf, type: 2}
+  sprite: {fileID: 9175820068487298826, guid: 4d58bc12262e76040a130c79a34f82b5, type: 3}
   id: WallRT
   tilemap: 50
