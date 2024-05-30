@@ -62,9 +62,54 @@
         },
         {
             "layer_id": 50,
-            "tiles": [],
-            "poses_x": [],
-            "poses_y": []
+            "tiles": [
+                "WallRT",
+                "WallRT",
+                "WallRT",
+                "WallRT",
+                "WallRT",
+                "WallRT",
+                "WallRT",
+                "WallRT",
+                "WallRT",
+                "WallRT",
+                "WallRT",
+                "WallRT",
+                "WallRT",
+                "WallRT"
+            ],
+            "poses_x": [
+                9,
+                9,
+                9,
+                9,
+                9,
+                9,
+                9,
+                9,
+                9,
+                9,
+                9,
+                10,
+                10,
+                10
+            ],
+            "poses_y": [
+                -4,
+                -3,
+                -2,
+                -1,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                -4,
+                6,
+                7
+            ]
         }
     ]
 }
