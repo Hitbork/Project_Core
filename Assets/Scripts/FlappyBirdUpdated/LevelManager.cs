@@ -9,7 +9,7 @@ using LoadSceneData.Level;
 
 public class LevelManager : MonoBehaviour
 {
-    private LevelData levelData = new LevelData();
+    private LevelData levelData = new LevelData("testLevel");
     public static LevelManager instance;
 
     [SerializeField] TMP_Text levelNameField, levelNameText;
@@ -38,7 +38,10 @@ public class LevelManager : MonoBehaviour
 
         // Adding UI if name is not default
         if (!levelData.levelName.IsIncorrect())
+        {
+            LoadLevel();
             loadLevelButton.SetActive(true);
+        }
 
         // Changing UI about level
         ChangeUILevelData();

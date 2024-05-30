@@ -23,6 +23,13 @@ namespace LoadSceneData
         {
             public LevelName levelName = new LevelName();
 
+            public LevelData() { }
+
+            public LevelData(string levelNameValue)
+            {
+                this.levelName = new LevelName(levelNameValue);
+            }
+
             public class LevelName
             {
                 //public string Value
