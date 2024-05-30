@@ -32,17 +32,24 @@ namespace LoadSceneData
 
             public class LevelName
             {
-                //public string Value
-                //{
-                //    get => this.value;
-                //    set
-                //    {
-                //        this.value = value;
-                //        IsIncorrect();
-                //    }
-                //}
+                public string Value
+                {
+                    get => this.value;
+                    set
+                    {
+                        this.value = value;
+                        IsIncorrect();
+                    }
+                }
 
-                //public readonly bool isIncorrect = true, isDefault;
+                public bool isIncorrect { get; private set; } = false;
+
+                public bool isDefault { get; private set; } = false;
+
+                public bool isEmpty { get; private set; } = false;
+
+                public bool isLengthIncorrect { get; private set; } = false;
+
 
                 private string value, errorMessage = string.Empty;
 
@@ -57,58 +64,67 @@ namespace LoadSceneData
 
                 public LevelName(string value)
                 {
-                    this.value = value;
-                    IsIncorrect();
+                    this.Value = value;
                 }
 
                 public void SetDefault()
                 {
+                    isIncorrect = true;
+                    isDefault = true;
                     this.errorMessage = $"Level name can't be {defaultLevelName}!";
                     this.value = defaultLevelName;
                 }
 
                 public void ClearErrorMessage() => errorMessage = string.Empty;
 
-                public bool IsDefault()
+                private bool IsDefault()
                 {
-                    this.errorMessage = $"Level name can't be {defaultLevelName}!";
-                    return this.value == defaultLevelName;
+                    if (this.value == defaultLevelName)
+                    {
+                        isDefault = true;
+                        this.errorMessage = $"Level name can't be {defaultLevelName}!";
+                    }
+                    else
+                        isDefault = false;
+
+                    return isDefault;
                 }
 
-                public bool IsLengthIncorrect()
+                private bool IsLengthIncorrect()
                 {
-                    if (this.value.Length < minLength)
+                    if (this.value.Length < minLength || this.value.Length > maxLength)
                     {
-                        errorMessage = $"Level name must be at least {minLength} digits!";
-                        return true;
-                    }
+                        isLengthIncorrect = true;
 
-                    if (this.value.Length > maxLength)
-                    {
-                        errorMessage = $"Level name must be less or equals to {maxLength} digits!";
-                        return true;
+                        if (this.value.Length < minLength)
+                            errorMessage = $"Level name must be at least {minLength} digits!";
+                        else
+                            errorMessage = $"Level name must be less or equals to {maxLength} digits!";
                     }
+                    else
+                        isLengthIncorrect = false;
 
-                    return false;
+                    return isLengthIncorrect;
                 }
 
-                public bool IsEmpty()
+                private bool IsEmpty()
                 {
                     if (string.IsNullOrEmpty(this.value) ||
                         string.IsNullOrWhiteSpace(this.value))
                     {
+                        isEmpty = true;
                         this.errorMessage = "Level name is empty!";
-                        return true;
                     }
+                    else
+                        isEmpty = false;
 
-                    return false;
+                    return isEmpty;
                 }
 
-                public bool IsIncorrect()
+                private bool IsIncorrect()
                 {
-                    return IsEmpty()
-                        || this.IsDefault()
-                        || this.IsLengthIncorrect();
+                    isIncorrect = IsEmpty() || this.IsDefault() || this.IsLengthIncorrect();
+                    return isIncorrect;
                 }
 
                 public string GetErrorMessage()
@@ -122,17 +138,6 @@ namespace LoadSceneData
                     }
 
                     return string.Empty;
-                }
-
-                public string Get()
-                {
-                    return value;
-                }
-
-                public void Set(string value)
-                {
-                    this.value = value;
-                    IsIncorrect();
                 }
             }
         }

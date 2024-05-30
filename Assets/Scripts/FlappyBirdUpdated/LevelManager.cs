@@ -9,7 +9,7 @@ using LoadSceneData.Level;
 
 public class LevelManager : MonoBehaviour
 {
-    private LevelData levelData = new LevelData("testLevel");
+    private LevelData levelData = new LevelData();
     public static LevelManager instance;
 
     [SerializeField] TMP_Text levelNameField, levelNameText;
@@ -37,7 +37,7 @@ public class LevelManager : MonoBehaviour
         }
 
         // Adding UI if name is not default
-        if (!levelData.levelName.IsIncorrect())
+        if (!levelData.levelName.isIncorrect)
         {
             LoadLevel();
             loadLevelButton.SetActive(true);
@@ -49,7 +49,7 @@ public class LevelManager : MonoBehaviour
 
     private void ChangeUILevelData()
     {
-        levelNameField.text = levelData.levelName.Get();
+        levelNameField.text = levelData.levelName.Value;
     }
 
     public List<CustomTile> tiles = new List<CustomTile>();
@@ -81,7 +81,7 @@ public class LevelManager : MonoBehaviour
 
     public void SaveLevelEvent()
     {
-        if (levelData.levelName.IsIncorrect())
+        if (levelData.levelName.isIncorrect)
             SavingLevelUI.SetActive(true);
         else 
             SaveLevel();
@@ -89,9 +89,9 @@ public class LevelManager : MonoBehaviour
 
     public void AcceptingSavingLevelButtonClick()
     {
-        SetLevelName(levelNameText.text);
+        levelData.levelName.Value = levelNameText.text;
 
-        if (!levelData.levelName.IsIncorrect())
+        if (!levelData.levelName.isIncorrect)
         {
             SaveLevel();
             SavingLevelUI.SetActive(false);
@@ -119,7 +119,7 @@ public class LevelManager : MonoBehaviour
 
     private void SetLevelName(string insertedName)
     {
-        levelData.levelName.Set(insertedName);
+        levelData.levelName.Value = insertedName;
     }
 
     void SaveLevel()
@@ -165,7 +165,7 @@ public class LevelManager : MonoBehaviour
 
         // Save the data as json
         string json = JsonUtility.ToJson(levelInfo, true);
-        File.WriteAllText(Application.dataPath + $"/LevelsOfUsers/{levelData.levelName.Get()}.json", json);
+        File.WriteAllText(Application.dataPath + $"/LevelsOfUsers/{levelData.levelName.Value}.json", json);
 
         loadLevelButton.SetActive(true);
 
@@ -175,7 +175,7 @@ public class LevelManager : MonoBehaviour
     void LoadLevel()
     {
         // Load the json file to a leveldata
-        string json = File.ReadAllText(Application.dataPath + $"/LevelsOfUsers/{levelData.levelName.Get()}.json");
+        string json = File.ReadAllText(Application.dataPath + $"/LevelsOfUsers/{levelData.levelName.Value}.json");
         LevelInfo levelInfo = JsonUtility.FromJson<LevelInfo>(json);
 
         foreach (var data in levelInfo.layers)
