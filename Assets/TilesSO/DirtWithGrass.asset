@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: DirtWithGrass
   m_EditorClassIdentifier: 
   tile: {fileID: 11400000, guid: de486fe804d2dc647845caefa2b7415c, type: 2}
+  sprite: {fileID: -2002935450, guid: b425613db706e0a49821a35253ec9db1, type: 3}
   id: DirtWithGrass
   tilemap: 20

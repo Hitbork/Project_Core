@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Cave
   m_EditorClassIdentifier: 
   tile: {fileID: 11400000, guid: a992d0e3d998ede458e9f5d8ce8b6734, type: 2}
+  sprite: {fileID: 4870420222146354088, guid: 0e3c1320fd5de4746b691e0d1d2b974d, type: 3}
   id: Cave
   tilemap: 50
