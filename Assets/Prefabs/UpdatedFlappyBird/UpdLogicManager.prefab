@@ -47,3 +47,4 @@ MonoBehaviour:
   playerScore: 0
   scoreText: {fileID: 0}
   gameOverScreen: {fileID: 0}
+  gameFinishScreen: {fileID: 0}

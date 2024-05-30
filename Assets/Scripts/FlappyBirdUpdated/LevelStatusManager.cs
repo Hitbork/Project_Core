@@ -7,7 +7,11 @@ public class LevelStatusManager : MonoBehaviour
     private LevelEditor levelEditor;
 
     [SerializeField]
-    List<GameObject> gameObjectsForEditingToSetActive, gameObjectsForTestingToSetActive, gameObjectsForEditingToInstantiate, gameObjectsForTestingToInstantiate;
+    List<GameObject> gameObjectsForEditingToSetActive,
+        gameObjectsForTestingToSetActive,
+        gameObjectsForEditingToInstantiate,
+        gameObjectsForTestingToInstantiate,
+        gameObjectsForEditingToSetUnactive;
 
     private List<string> tagsOfObjectsToDestroy = new List<string>();
 
@@ -36,6 +40,7 @@ public class LevelStatusManager : MonoBehaviour
         DestroyingObjects();
         InstatiatingObjects(gameObjectsForEditingToInstantiate);
         levelEditor.enabled = true;
+        SetUnactive(gameObjectsForEditingToSetUnactive);
         SetActiveForEditing(true);
     }
 
@@ -61,6 +66,14 @@ public class LevelStatusManager : MonoBehaviour
         }
     }
 
+    private void SetUnactive(List<GameObject> gameObjects)
+    {
+        foreach (GameObject currentGameObject in gameObjects)
+        {
+            currentGameObject.SetActive(false);
+        }
+    }
+
     private void SetActiveForEditing(bool boolean)
     {
         foreach (GameObject currentGameObject in gameObjectsForTestingToSetActive)
@@ -72,5 +85,11 @@ public class LevelStatusManager : MonoBehaviour
         {
             currentGameObject.SetActive(boolean);
         }
+    }
+
+    public void ButtonAfterFinishClick(bool isPressedPlayAgain)
+    {
+        TurnOnEditingMode();
+        if (isPressedPlayAgain) TurnOnTestableMode();
     }
 }

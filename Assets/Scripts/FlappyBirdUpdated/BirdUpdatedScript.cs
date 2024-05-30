@@ -6,13 +6,13 @@ public class BirdUpdatedScript : MonoBehaviour
 {
     public Rigidbody2D myRigidBody2D;
     public float speed = 5.0f;
-    public LogicScript logic;
+    public UpdLogicScript logic;
     private bool birdIsAlive = true;
 
     // Start is called before the first frame update
     void Start()
     { 
-        logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
+        logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<UpdLogicScript>();
         myRigidBody2D.velocity = Vector2.right * speed;
     }
 

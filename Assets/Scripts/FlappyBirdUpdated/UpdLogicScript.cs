@@ -8,7 +8,7 @@ public class UpdLogicScript : MonoBehaviour
 {
     public int playerScore;
     public Text scoreText;
-    public GameObject gameOverScreen;
+    public GameObject gameOverScreen, gameFinishScreen;
 
     [ContextMenu("Increase Score")]
     public void addScore(int scoreToAdd)
@@ -26,5 +26,10 @@ public class UpdLogicScript : MonoBehaviour
     public void gameOver()
     {
         gameOverScreen.SetActive(true);
+    }
+
+    public void FinishGame()
+    {
+        gameFinishScreen.SetActive(true);
     }
 }

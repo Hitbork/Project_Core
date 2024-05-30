@@ -4,35 +4,34 @@ using UnityEngine;
 
 public class FinishLineScript : MonoBehaviour
 {
-    public Rigidbody2D birdRigidBody = null;
+    public UpdLogicScript logic;
 
     // Start is called before the first frame update
     void Start()
     {
-        SetRigidbody();
+        SetLogicScript();
     }
-    private void SetRigidbody()
+    private void SetLogicScript()
     {
         try
         {
-            birdRigidBody = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+            logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<UpdLogicScript>();
         }
         // Catching the error because gameobject 
         // tagged player may be set unactive
         catch
         {
-            Debug.Log($"{this.name} couldn't find the bird");
+            Debug.Log($"{this.name} couldn't find logic script");
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (birdRigidBody == null)
+        if (logic == null)
         {
-            SetRigidbody();
+            SetLogicScript();
         }
 
-
+        logic.FinishGame();
     }
 }
