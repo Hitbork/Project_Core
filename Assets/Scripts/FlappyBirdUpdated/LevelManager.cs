@@ -4,10 +4,19 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Linq;
 using System.IO;
+using TMPro;
+using LoadSceneData.Level;
 
 public class LevelManager : MonoBehaviour
 {
+    private LevelData levelData = new LevelData();
     public static LevelManager instance;
+
+    [SerializeField] TMP_Text levelNameField, levelNameText;
+    [SerializeField] GameObject SavingLevelUI, loadLevelButton;
+
+    [SerializeField] TMP_Text errorField;
+    [SerializeField] GameObject errorUI;
 
     // Using awake, because it's always called before Start() functions
     // So we may use LevelManager.cs script to set up references between another scripts
@@ -26,11 +35,27 @@ public class LevelManager : MonoBehaviour
                 }
             }
         }
+
+        // Adding UI if name is not default
+        if (!levelData.levelName.isIncorrect)
+        {
+            LoadLevel();
+            loadLevelButton.SetActive(true);
+        }
+
+        // Changing UI about level
+        ChangeUILevelData();
+    }
+
+    private void ChangeUILevelData()
+    {
+        levelNameField.text = levelData.levelName.Value;
     }
 
     public List<CustomTile> tiles = new List<CustomTile>();
     [SerializeField] List<Tilemap> tilemaps = new List<Tilemap>();
     public Dictionary<int, Tilemap> layers = new Dictionary<int, Tilemap>();
+
 
     public enum Tilemaps
     {
@@ -50,21 +75,66 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.A)) SaveLevel();
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.A)) SaveLevelEvent();
         if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.D)) LoadLevel(); 
+    }
+
+    public void SaveLevelEvent()
+    {
+        if (levelData.levelName.isIncorrect)
+            SavingLevelUI.SetActive(true);
+        else 
+            SaveLevel();
+    }
+
+    public void AcceptingSavingLevelButtonClick()
+    {
+        levelData.levelName.Value = levelNameText.text;
+
+        if (!levelData.levelName.isIncorrect)
+        {
+            SaveLevel();
+            SavingLevelUI.SetActive(false);
+        } else
+        {
+            ShowError(levelData.levelName.GetErrorMessage());
+        }
+    }
+
+    public void CancelingSavingLevelButtonClick()
+    {
+        SavingLevelUI.SetActive(false);
+    }
+
+    public void CancellingErrorButtonClick() 
+    {
+        errorUI.SetActive(false);
+    }
+
+    private void ShowError(string errMessage)
+    {
+        errorField.text = $"'{errMessage}'"; 
+        errorUI.SetActive(true);
+    }
+
+    private void SetLevelName(string insertedName)
+    {
+        levelData.levelName.Value = insertedName;
     }
 
     void SaveLevel()
     {
-        LevelData levelData = new LevelData();
+        ChangeUILevelData();
+
+        LevelInfo levelInfo = new LevelInfo();
 
         // Set up the layers in the leveldata
         foreach (var item in layers.Keys)
         {
-            levelData.layers.Add(new LayerData(item));
+            levelInfo.layers.Add(new LayerData(item));
         }
 
-        foreach (var layerData in levelData.layers)
+        foreach (var layerData in levelInfo.layers)
         {
             if (!layers.TryGetValue(layerData.layer_id, out Tilemap tilemap)) break;
             
@@ -94,8 +164,10 @@ public class LevelManager : MonoBehaviour
         }
 
         // Save the data as json
-        string json = JsonUtility.ToJson(levelData, true);
-        File.WriteAllText(Application.dataPath + "/testLevel.json", json);
+        string json = JsonUtility.ToJson(levelInfo, true);
+        File.WriteAllText(Application.dataPath + $"/LevelsOfUsers/{levelData.levelName.Value}.json", json);
+
+        loadLevelButton.SetActive(true);
 
         Debug.Log("Level was saved");
     }
@@ -103,10 +175,10 @@ public class LevelManager : MonoBehaviour
     void LoadLevel()
     {
         // Load the json file to a leveldata
-        string json = File.ReadAllText(Application.dataPath + "/testLevel.json");
-        LevelData levelData = JsonUtility.FromJson<LevelData>(json);
+        string json = File.ReadAllText(Application.dataPath + $"/LevelsOfUsers/{levelData.levelName.Value}.json");
+        LevelInfo levelInfo = JsonUtility.FromJson<LevelInfo>(json);
 
-        foreach (var data in levelData.layers)
+        foreach (var data in levelInfo.layers)
         {
             if (!layers.TryGetValue(data.layer_id, out Tilemap tilemap)) break;
 
@@ -127,7 +199,7 @@ public class LevelManager : MonoBehaviour
 } 
 
 [System.Serializable]
-public class LevelData
+public class LevelInfo
 {
     public List<LayerData> layers = new List<LayerData>();
 }
