@@ -1,15 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FinishLineScript : MonoBehaviour
 {
-    public UpdLogicScript logic;
+    [SerializeField] UpdLogicScript logic;
+    [SerializeField] BirdUpdatedScript birdUpdatedScript;
 
     // Start is called before the first frame update
     void Start()
     {
         SetLogicScript();
+        SetBirdScript();
     }
     private void SetLogicScript()
     {
@@ -23,15 +23,35 @@ public class FinishLineScript : MonoBehaviour
         {
             Debug.Log($"{this.name} couldn't find logic script");
         }
+
+    }
+
+    private void SetBirdScript()
+    {
+        try
+        {
+            birdUpdatedScript = GameObject.FindGameObjectWithTag("Player").GetComponent<BirdUpdatedScript>();
+        }
+        // Catching the error because gameobject 
+        // tagged player may be set unactive
+        catch
+        {
+            Debug.Log($"Layer: {this.name} couldn't find bird");
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (logic == null)
-        {
             SetLogicScript();
-        }
 
-        logic.FinishGame();
+        if (birdUpdatedScript == null)
+            SetBirdScript();
+
+        if (birdUpdatedScript.birdIsAlive)
+        {
+            birdUpdatedScript.SetBirdUnactive();
+            logic.FinishGame();
+        }
     }
 }
