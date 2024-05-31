@@ -9,6 +9,11 @@ public class CameraScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SetPlayer();
+    }
+
+    private void SetPlayer()
+    {
         try
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -17,11 +22,17 @@ public class CameraScript : MonoBehaviour
         {
             Debug.Log("Camera hasn't found the player");
         }
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (player == null)
+        {
+            SetPlayer();
+        }
+
         if (player != null)
         {
             Vector3 temp = transform.position;

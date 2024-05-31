@@ -6,13 +6,13 @@ public class BirdUpdatedScript : MonoBehaviour
 {
     public Rigidbody2D myRigidBody2D;
     public float speed = 5.0f;
-    public LogicScript logic;
-    private bool birdIsAlive = true;
+    public UpdLogicScript logic;
+    public bool birdIsAlive { get; private set; } = true;
 
     // Start is called before the first frame update
     void Start()
     { 
-        logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
+        logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<UpdLogicScript>();
         myRigidBody2D.velocity = Vector2.right * speed;
     }
 
@@ -34,12 +34,18 @@ public class BirdUpdatedScript : MonoBehaviour
             myRigidBody2D.velocity += Vector2.up * 5;
         }
     }
+
+    public void SetBirdUnactive()
+    {
+        birdIsAlive = false;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "GroundLayer")
+        if (collision.gameObject.tag == "GroundLayer" && birdIsAlive)
         {
             logic.gameOver();
-            birdIsAlive = false;
+            SetBirdUnactive();
         }
     }
 }

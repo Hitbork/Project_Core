@@ -64,6 +64,7 @@ public class LevelManager : MonoBehaviour
     {
         Sky = 10,
         Background = 20,
+        FinishLine = 21,
         BounceNESUp = 25,
         BounceNESUpRight = 26,
         BounceNESRight = 27,

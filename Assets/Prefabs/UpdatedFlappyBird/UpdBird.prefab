@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 3469552578839017484}
   - component: {fileID: 3469552578839017485}
   - component: {fileID: 3469552578839017486}
+  - component: {fileID: -8877376519311659443}
   m_Layer: 3
-  m_Name: Bird
+  m_Name: UpdBird
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3469552578839017487}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 23
   m_Sprite: {fileID: 21300000, guid: a89eb3dc67af7fd4786cea908796b918, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -138,3 +139,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myRigidBody2D: {fileID: 3469552578839017484}
   speed: 5
+  logic: {fileID: 0}
+--- !u!210 &-8877376519311659443
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3469552578839017487}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 15

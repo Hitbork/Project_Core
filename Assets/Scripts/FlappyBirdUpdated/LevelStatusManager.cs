@@ -1,13 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class LevelStatusManager : MonoBehaviour
 {
     private LevelEditor levelEditor;
 
     [SerializeField]
-    List<GameObject> gameObjectsForEditingToSetActive, gameObjectsForTestingToSetActive, gameObjectsForEditingToInstantiate, gameObjectsForTestingToInstantiate;
+    List<GameObject> gameObjectsForEditingToSetActive,
+        gameObjectsForTestingToSetActive,
+        gameObjectsForEditingToInstantiate,
+        gameObjectsForTestingToInstantiate,
+        gameObjectsForEditingToSetUnactive;
+
+    public bool isEditingMode { get; private set; } = true; 
 
     private List<string> tagsOfObjectsToDestroy = new List<string>();
 
@@ -20,11 +27,13 @@ public class LevelStatusManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.M)) TurnOnTestableMode();
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.L)) TurnOnEditingMode();
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.M) && isEditingMode) TurnOnTestableMode();
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.L) && !isEditingMode) TurnOnEditingMode();
     }
     public void TurnOnTestableMode()
     {
+        EventSystemDeactivateModule();
+        isEditingMode = false;
         DestroyingObjects();
         levelEditor.enabled = false;
         SetActiveForEditing(false);
@@ -33,9 +42,12 @@ public class LevelStatusManager : MonoBehaviour
 
     public void TurnOnEditingMode()
     {
+        EventSystemDeactivateModule();
+        isEditingMode = true;
         DestroyingObjects();
         InstatiatingObjects(gameObjectsForEditingToInstantiate);
         levelEditor.enabled = true;
+        SetUnactive(gameObjectsForEditingToSetUnactive);
         SetActiveForEditing(true);
     }
 
@@ -56,8 +68,16 @@ public class LevelStatusManager : MonoBehaviour
             if (!currentGameObject.CompareTag("MainCamera"))
                 Instantiate(currentGameObject, new Vector3(0, 0, 0), transform.rotation);
             else
-                Instantiate(currentGameObject, new Vector3(0, 0, -1), transform.rotation);
+                Instantiate(currentGameObject, new Vector3(0, 0, -10), transform.rotation);
             tagsOfObjectsToDestroy.Add(currentGameObject.tag);
+        }
+    }
+
+    private void SetUnactive(List<GameObject> gameObjects)
+    {
+        foreach (GameObject currentGameObject in gameObjects)
+        {
+            currentGameObject.SetActive(false);
         }
     }
 
@@ -72,5 +92,20 @@ public class LevelStatusManager : MonoBehaviour
         {
             currentGameObject.SetActive(boolean);
         }
+    }
+
+    public void ButtonAfterFinishClick(bool isPressedPlayAgain)
+    {
+        EventSystemDeactivateModule();
+        TurnOnEditingMode();
+        if (isPressedPlayAgain)
+            TurnOnTestableMode();
+    }
+
+    private static void EventSystemDeactivateModule()
+    {
+        EventSystem currentEventSystem = EventSystem.current;
+        if (currentEventSystem.currentInputModule != null)
+            currentEventSystem.currentInputModule.DeactivateModule();
     }
 }
