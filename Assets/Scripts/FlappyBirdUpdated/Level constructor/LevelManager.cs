@@ -78,6 +78,7 @@ namespace FlappyBirdUpdated
                 BounceNESLeft = 31,
                 BounceNESUpLeft = 32,
                 BounceRight = 33,
+                TouchableGround = 49,
                 Ground = 50
             }
 

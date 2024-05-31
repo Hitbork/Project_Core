@@ -24,7 +24,7 @@ namespace FlappyBirdUpdated
         {
             if (myRigidBody2D.velocity.x > 5.0f && birdIsAlive)
             {
-                myRigidBody2D.velocity -= Vector2.left * 2f * Time.deltaTime;
+                myRigidBody2D.velocity -= Vector2.right * 2f * Time.deltaTime;
             }
 
             if (myRigidBody2D.velocity.x < 5.0f && birdIsAlive)
