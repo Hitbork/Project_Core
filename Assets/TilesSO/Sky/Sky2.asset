@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad0bda4b9e4fd534b84799128be69dff, type: 3}
-  m_Name: WallRT
+  m_Name: Sky2
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: e9ddaa08eba3b5941856d80e51eb39cf, type: 2}
-  sprite: {fileID: 9175820068487298826, guid: 4d58bc12262e76040a130c79a34f82b5, type: 3}
-  id: WallRT
-  tilemap: 50
+  tile: {fileID: 11400000, guid: e721a63f476c4ad47bf1f2e933627946, type: 2}
+  sprite: {fileID: 1324079293, guid: ad992df11ef7fa84f8d892637e23fefc, type: 3}
+  id: Sky2
+  tilemap: 0

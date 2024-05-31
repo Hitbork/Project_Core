@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad0bda4b9e4fd534b84799128be69dff, type: 3}
-  m_Name: DirtWithGrass
+  m_Name: Background
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: de486fe804d2dc647845caefa2b7415c, type: 2}
-  sprite: {fileID: -2002935450, guid: b425613db706e0a49821a35253ec9db1, type: 3}
-  id: DirtWithGrass
+  tile: {fileID: 11400000, guid: acc5983af056f3d4b8afaca4a89045ff, type: 2}
+  sprite: {fileID: 21300000, guid: 61b332d2524cc234fb02ff6582d5e2c1, type: 3}
+  id: Background
   tilemap: 20
