@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad0bda4b9e4fd534b84799128be69dff, type: 3}
   m_Name: FinishLine
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: 05eb8373cde7d3948bcf469a82e4d6ae, type: 2}
-  sprite: {fileID: -3357707860964885180, guid: 96b78cad7bb6ddf4096fc152168d88c0, type: 3}
+  tile: {fileID: 11400000, guid: ad4054b7ca29d974abcea7a3b5d9b330, type: 2}
+  sprite: {fileID: 21300000, guid: 68d1c7d5961d0304f9839008dfd4560b, type: 3}
   id: FinishLine
   tilemap: 21
