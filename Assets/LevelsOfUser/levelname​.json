@@ -1,0 +1,181 @@
+{
+    "layers": [
+        {
+            "layer_id": 10,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 20,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 21,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 25,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 26,
+            "tiles": [
+                "BounceNESUpRight",
+                "BounceNESUpRight",
+                "BounceNESUpRight",
+                "BounceNESUpRight",
+                "BounceNESUpRight",
+                "BounceNESUpRight",
+                "BounceNESUpRight",
+                "BounceNESUpRight",
+                "BounceNESUpRight"
+            ],
+            "poses_x": [
+                -3,
+                -2,
+                -1,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "poses_y": [
+                -4,
+                -4,
+                -4,
+                -4,
+                -4,
+                -4,
+                -4,
+                -4,
+                -4
+            ]
+        },
+        {
+            "layer_id": 27,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 28,
+            "tiles": [
+                "BounceNESDownRight",
+                "BounceNESDownRight",
+                "BounceNESDownRight",
+                "BounceNESDownRight",
+                "BounceNESDownRight",
+                "BounceNESDownRight",
+                "BounceNESDownRight"
+            ],
+            "poses_x": [
+                -10,
+                -9,
+                -8,
+                -7,
+                -6,
+                -5,
+                -4
+            ],
+            "poses_y": [
+                -4,
+                -4,
+                -4,
+                -4,
+                -4,
+                -4,
+                -4
+            ]
+        },
+        {
+            "layer_id": 29,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 30,
+            "tiles": [
+                "BounceNESDownLeft",
+                "BounceNESDownLeft",
+                "BounceNESDownLeft",
+                "BounceNESDownLeft",
+                "BounceNESDownLeft"
+            ],
+            "poses_x": [
+                -15,
+                -14,
+                -13,
+                -12,
+                -11
+            ],
+            "poses_y": [
+                -4,
+                -4,
+                -4,
+                -4,
+                -4
+            ]
+        },
+        {
+            "layer_id": 31,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 32,
+            "tiles": [
+                "BounceNESUpLeft",
+                "BounceNESUpLeft",
+                "BounceNESUpLeft",
+                "BounceNESUpLeft",
+                "BounceNESUpLeft",
+                "BounceNESUpLeft",
+                "BounceNESUpLeft",
+                "BounceNESUpLeft",
+                "BounceNESUpLeft",
+                "BounceNESUpLeft"
+            ],
+            "poses_x": [
+                5,
+                5,
+                5,
+                5,
+                5,
+                5,
+                5,
+                6,
+                6,
+                6
+            ],
+            "poses_y": [
+                -3,
+                -2,
+                -1,
+                1,
+                2,
+                3,
+                4,
+                -1,
+                0,
+                1
+            ]
+        },
+        {
+            "layer_id": 50,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        }
+    ]
+}
