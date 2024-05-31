@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Sky3
   m_EditorClassIdentifier: 
   tile: {fileID: 11400000, guid: 919b0fa0a099b684ebb5a795c9b0156f, type: 2}
-  sprite: {fileID: -614600000, guid: ad992df11ef7fa84f8d892637e23fefc, type: 3}
+  sprite: {fileID: 265043320, guid: ad992df11ef7fa84f8d892637e23fefc, type: 3}
   id: Sky3
   tilemap: 10

@@ -119,8 +119,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bc62e507cd041c94fbbe59af79d0c6f3
-      internalID: -684039745
+      spriteID: f7e546c3c677dc542b299cc5caf44c00
+      internalID: -333995135
       vertices: []
       indices: 
       edges: []
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63e2b3cb75db2074996131b7fcf73156
-      internalID: -544635757
+      spriteID: 682df1ddeb4d49b47af6ea80d4d54d47
+      internalID: -505924122
       vertices: []
       indices: 
       edges: []
@@ -161,8 +161,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c5991af5b8749d41bfb5c6da58f3e33
-      internalID: 340258087
+      spriteID: 2743f9dba52d48048882968c5475fbfa
+      internalID: 1324079293
       vertices: []
       indices: 
       edges: []
@@ -182,8 +182,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 341d36df931f39a458d1a5257a0007a1
-      internalID: -614600000
+      spriteID: 2616303eaf2e646468c4346c6b47edd6
+      internalID: 265043320
       vertices: []
       indices: 
       edges: []
@@ -199,10 +199,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Sky tilemap_2: 340258087
-      Sky tilemap_1: -544635757
-      Sky tilemap_3: -614600000
-      Sky tilemap_0: -684039745
+      Sky tilemap_2: 1324079293
+      Sky tilemap_1: -505924122
+      Sky tilemap_3: 265043320
+      Sky tilemap_0: -333995135
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
