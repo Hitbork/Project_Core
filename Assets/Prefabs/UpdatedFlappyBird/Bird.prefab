@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 3469552578839017491}
   - component: {fileID: 3469552578839017484}
   - component: {fileID: 3469552578839017485}
-  - component: {fileID: 3469552578839017486}
   - component: {fileID: -8877376519311659443}
+  - component: {fileID: 3127233534019596198}
   m_Layer: 3
-  m_Name: UpdBird
+  m_Name: Bird
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,21 +125,6 @@ CircleCollider2D:
   m_Offset: {x: -0.1, y: -0.46}
   serializedVersion: 2
   m_Radius: 1.88
---- !u!114 &3469552578839017486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3469552578839017487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bbf2f2c1c54c9a42ad61ea15a861127, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myRigidBody2D: {fileID: 3469552578839017484}
-  speed: 5
-  logic: {fileID: 0}
 --- !u!210 &-8877376519311659443
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -151,3 +136,18 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 15
+--- !u!114 &3127233534019596198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3469552578839017487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb2998067e1c564cbd6ab80e4a2b52c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myRigidBody2D: {fileID: 3469552578839017484}
+  speed: 5
+  logic: {fileID: 0}

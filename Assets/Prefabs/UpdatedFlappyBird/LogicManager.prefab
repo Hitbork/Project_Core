@@ -9,14 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7451167248810840166}
-  - component: {fileID: -4005532968930088947}
+  - component: {fileID: 8509826140522761108}
   m_Layer: 0
-  m_Name: UpdLogicManager
+  m_Name: LogicManager
   m_TagString: Logic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7451167248810840166
 Transform:
   m_ObjectHideFlags: 0
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-4005532968930088947
+--- !u!114 &8509826140522761108
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7451167248810840164}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fa8b42e9ed73284289c78a73b82e7ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c3e1851f18e47b468103fa3a2193a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerScore: 0

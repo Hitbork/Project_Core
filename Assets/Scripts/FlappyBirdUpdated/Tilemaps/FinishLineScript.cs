@@ -1,9 +1,9 @@
 using UnityEngine;
-
+using FlappyBirdUpdated;
 public class FinishLineScript : MonoBehaviour
 {
-    [SerializeField] UpdLogicScript logic;
-    [SerializeField] BirdUpdatedScript birdUpdatedScript;
+    [SerializeField] LogicScript logic;
+    [SerializeField] PlayerScript birdUpdatedScript;
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +15,7 @@ public class FinishLineScript : MonoBehaviour
     {
         try
         {
-            logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<UpdLogicScript>();
+            logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
         }
         // Catching the error because gameobject 
         // tagged player may be set unactive
@@ -30,7 +30,7 @@ public class FinishLineScript : MonoBehaviour
     {
         try
         {
-            birdUpdatedScript = GameObject.FindGameObjectWithTag("Player").GetComponent<BirdUpdatedScript>();
+            birdUpdatedScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>();
         }
         // Catching the error because gameobject 
         // tagged player may be set unactive
