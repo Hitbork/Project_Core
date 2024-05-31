@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad0bda4b9e4fd534b84799128be69dff, type: 3}
   m_Name: BounceNESRight
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: 0093f13f48b3cd24dad4ba4d67cd8409, type: 2}
-  sprite: {fileID: -1299178441, guid: b425613db706e0a49821a35253ec9db1, type: 3}
+  tile: {fileID: 11400000, guid: 5724b86ee7ed0874190e3f986f01195b, type: 2}
+  sprite: {fileID: 1264733664, guid: 87f5e774f757246478a7742adfa9001f, type: 3}
   id: BounceNESRight
   tilemap: 27

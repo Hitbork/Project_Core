@@ -4552,9 +4552,17 @@ PrefabInstance:
       value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1279006521241917891, guid: 0cab3b8759920f64cb584a9e73f24f75, type: 3}
-      propertyPath: tiles.Array.data[12]
+      propertyPath: tiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 15a469178fcd5e34195009f77d315771, type: 2}
+    - target: {fileID: 1279006521241917891, guid: 0cab3b8759920f64cb584a9e73f24f75, type: 3}
+      propertyPath: tiles.Array.data[3]
       value: 
       objectReference: {fileID: 11400000, guid: 3bf45a51bd742a94e867447e539902d6, type: 2}
+    - target: {fileID: 1279006521241917891, guid: 0cab3b8759920f64cb584a9e73f24f75, type: 3}
+      propertyPath: tiles.Array.data[12]
+      value: 
+      objectReference: {fileID: 11400000, guid: d8ddc8b0c299ee74a9a31d3bfbf6f185, type: 2}
     - target: {fileID: 1279006521241917891, guid: 0cab3b8759920f64cb584a9e73f24f75, type: 3}
       propertyPath: tilemaps.Array.data[0]
       value: 
