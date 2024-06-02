@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menus/MainMenu.unity
+    guid: dab1d748f1f13914da29c2add5090d38
+  - enabled: 1
+    path: Assets/Scenes/LevelConstructor.unity
+    guid: f0dc31ecf4d24974f9c833dfdf1cb6be
+  - enabled: 1
+    path: Assets/Scenes/Default levels/Level_1.unity
+    guid: 7e864f436185c2a4a821c4ad7edc2fca
+  - enabled: 1
     path: Assets/Scenes/FlappyBirdDefault.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
