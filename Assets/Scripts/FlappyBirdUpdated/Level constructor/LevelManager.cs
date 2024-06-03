@@ -7,6 +7,7 @@ using System.Linq;
 using System.IO;
 using TMPro;
 using LoadSceneData.Level;
+using System;
 
 namespace FlappyBirdUpdated
 {
@@ -14,7 +15,7 @@ namespace FlappyBirdUpdated
     {
         public class LevelManager : MonoBehaviour
         {
-            private LevelData levelData = new LevelData();
+            private LevelData levelData = new LevelData("TestLevel");
             public static LevelManager instance;
 
             [SerializeField] TMP_Text levelNameField, levelNameText;
@@ -177,9 +178,20 @@ namespace FlappyBirdUpdated
 
             void LoadLevel()
             {
-                // Load the json file to a leveldata
-                string json = File.ReadAllText(Application.dataPath + $"/LevelsOfUser/{levelData.levelName.Value}.json");
-                LevelInfo levelInfo = JsonUtility.FromJson<LevelInfo>(json);
+                LevelInfo levelInfo = new LevelInfo();
+
+                try
+                {
+                    // Load the json file to a leveldata
+                    string json = File.ReadAllText(Application.dataPath + $"/LevelsOfUser/{levelData.levelName.Value}.json");
+                    levelInfo = JsonUtility.FromJson<LevelInfo>(json);
+                    Debug.Log("File found succesfully");
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.Message);
+                    return;
+                }
 
                 foreach (var data in levelInfo.layers)
                 {

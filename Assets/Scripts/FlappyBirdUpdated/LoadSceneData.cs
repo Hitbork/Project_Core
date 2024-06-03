@@ -62,9 +62,9 @@ namespace LoadSceneData
                     SetDefault();
                 }
 
-                public LevelName(string value)
+                public LevelName(string strValue)
                 {
-                    this.Value = value;
+                    this.Value = strValue;
                 }
 
                 public void SetDefault()
