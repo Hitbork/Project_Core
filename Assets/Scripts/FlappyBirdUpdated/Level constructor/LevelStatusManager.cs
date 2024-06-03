@@ -22,7 +22,7 @@ namespace FlappyBirdUpdated
 
             private List<string> tagsOfObjectsToDestroy = new List<string>();
 
-            private void Awake()
+            private void Start()
             {
                 levelEditor = GameObject.Find("Grid").GetComponent<LevelEditor>();
                 TurnOnEditingMode();
