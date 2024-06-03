@@ -231,6 +231,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bird
       objectReference: {fileID: 0}
+    - target: {fileID: 2375750398209979251, guid: 416a8bcc86ad6e444a228fa1d0f3da7c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519178202309646238, guid: 416a8bcc86ad6e444a228fa1d0f3da7c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519178202309646238, guid: 416a8bcc86ad6e444a228fa1d0f3da7c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519178202309646238, guid: 416a8bcc86ad6e444a228fa1d0f3da7c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5313615456154417821, guid: 416a8bcc86ad6e444a228fa1d0f3da7c, type: 3}
       propertyPath: m_IsActive
       value: 1

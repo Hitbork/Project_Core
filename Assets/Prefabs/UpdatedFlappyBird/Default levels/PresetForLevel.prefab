@@ -31,7 +31,7 @@ Transform:
   - {fileID: 556729380837488264}
   - {fileID: 2232746961848799687}
   - {fileID: 7979766533982832261}
-  - {fileID: 5724929298433127416}
+  - {fileID: 6895569730460789584}
   - {fileID: 8033852401232722559}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -98,15 +98,15 @@ PrefabInstance:
     - target: {fileID: 8509826140522761108, guid: b2c6eaa775c9dd24ba545f24667c3db4, type: 3}
       propertyPath: scoreText
       value: 
-      objectReference: {fileID: 331496103301093745}
+      objectReference: {fileID: 1466837626671071705}
     - target: {fileID: 8509826140522761108, guid: b2c6eaa775c9dd24ba545f24667c3db4, type: 3}
       propertyPath: gameOverScreen
       value: 
-      objectReference: {fileID: 5724929298379592962}
+      objectReference: {fileID: 6895569730451295658}
     - target: {fileID: 8509826140522761108, guid: b2c6eaa775c9dd24ba545f24667c3db4, type: 3}
       propertyPath: gameFinishScreen
       value: 
-      objectReference: {fileID: 3475275440658344923}
+      objectReference: {fileID: 2375750398209979251}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2c6eaa775c9dd24ba545f24667c3db4, type: 3}
 --- !u!4 &7979766533982832261 stripped
@@ -325,17 +325,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4731002863157794997, guid: 2ffbf0a58a0b07b45b75dce41e0394fb, type: 3}
   m_PrefabInstance: {fileID: 3376041898996490954}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &3376041899528864318
+--- !u!1001 &4474582173891484310
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 7612796818944251212}
     m_Modifications:
-    - target: {fileID: 170821212117046034, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
-      propertyPath: m_Name
-      value: MainMenuButton
-      objectReference: {fileID: 0}
     - target: {fileID: 2084326591789927688, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -364,33 +360,141 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 2224976822747310565, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2224976822796674535, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
-      propertyPath: m_Name
-      value: NextLevelBtn
-      objectReference: {fileID: 0}
-    - target: {fileID: 2224976823438837433, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+    - target: {fileID: 2224976822796674533, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2224976823438837433, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+    - target: {fileID: 2224976822796674533, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 9206192758191857015}
-    - target: {fileID: 2224976823438837433, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+    - target: {fileID: 2224976822796674533, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: restartGame
+      value: PlayNextLevel
       objectReference: {fileID: 0}
-    - target: {fileID: 2224976823438837433, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+    - target: {fileID: 2224976822796674533, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: FlappyBirdUpdated.LogicScript, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2866196559899130112, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2866196559899130112, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2866196559899130112, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9206192758191857015}
+    - target: {fileID: 2866196559899130112, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2866196559899130112, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenMainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2866196559899130112, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FlappyBirdUpdated.LogicScript, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2866196559899130112, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2986163262417210220, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2986163262417210220, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2986163262417210220, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9206192758191857015}
+    - target: {fileID: 2986163262417210220, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2986163262417210220, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenMainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2986163262417210220, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FlappyBirdUpdated.LogicScript, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2986163262417210220, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5769188052778354204, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5769188052778354204, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5769188052778354204, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9206192758191857015}
+    - target: {fileID: 5769188052778354204, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5769188052778354204, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenLevelsMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 5769188052778354204, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FlappyBirdUpdated.LogicScript, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5769188052778354204, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820271486637503600, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820271486637503600, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820271486637503600, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9206192758191857015}
+    - target: {fileID: 6820271486637503600, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820271486637503600, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenLevelsMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820271486637503600, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FlappyBirdUpdated.LogicScript, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820271486637503600, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7037178866876936642, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7037178866876936642, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7037178866876936646, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
       propertyPath: m_Pivot.x
@@ -478,10 +582,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
---- !u!114 &331496103301093745 stripped
+--- !u!114 &1466837626671071705 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3045464464019217231, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
-  m_PrefabInstance: {fileID: 3376041899528864318}
+  m_PrefabInstance: {fileID: 4474582173891484310}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -489,18 +593,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &3475275440658344923 stripped
+--- !u!1 &2375750398209979251 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2224976822747310565, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
-  m_PrefabInstance: {fileID: 3376041899528864318}
+  m_PrefabInstance: {fileID: 4474582173891484310}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5724929298379592962 stripped
+--- !u!1 &6895569730451295658 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7037178866831759164, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
-  m_PrefabInstance: {fileID: 3376041899528864318}
+  m_PrefabInstance: {fileID: 4474582173891484310}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &5724929298433127416 stripped
+--- !u!224 &6895569730460789584 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7037178866876936646, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
-  m_PrefabInstance: {fileID: 3376041899528864318}
+  m_PrefabInstance: {fileID: 4474582173891484310}
   m_PrefabAsset: {fileID: 0}

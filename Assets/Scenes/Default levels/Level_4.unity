@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2375750398209979251, guid: 416a8bcc86ad6e444a228fa1d0f3da7c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5501074265715566956, guid: 416a8bcc86ad6e444a228fa1d0f3da7c, type: 3}
       propertyPath: m_Name
       value: PresetForLevel

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -34,6 +32,25 @@ namespace FlappyBirdUpdated
         public void FinishGame()
         {
             gameFinishScreen.SetActive(true);
+        }
+
+        public void PlayNextLevel()
+        {
+            string currentSceneName = SceneManager.GetActiveScene().name;
+            int currentLevelNumber = (int)char.GetNumericValue(currentSceneName[currentSceneName.Length - 1]);
+            int nextLevelNumber = currentLevelNumber + 1;
+            string nextLevelSceneName = currentSceneName.Remove(currentSceneName.Length - 1) + nextLevelNumber.ToString();
+            SceneManager.LoadScene(nextLevelSceneName);
+        }
+
+        public void OpenLevelsMenu()
+        {
+            SceneManager.LoadScene("LevelsMenu");
+        }
+
+        public void OpenMainMenu()
+        {
+            SceneManager.LoadScene("MainMenu");
         }
     }
 }
