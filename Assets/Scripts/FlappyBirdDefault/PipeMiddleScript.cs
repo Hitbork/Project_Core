@@ -2,27 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PipeMiddleScript : MonoBehaviour
+namespace FlappyBirdDefault
 {
-    public LogicScript logic;
-
-    // Start is called before the first frame update
-    void Start()
+    public class PipeMiddleScript : MonoBehaviour
     {
-        logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
-    }
+        public LogicScript logic;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == 3)
+        // Start is called before the first frame update
+        void Start()
         {
-            logic.addScore(1);
+            logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+        
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.gameObject.layer == 3)
+            {
+                logic.addScore(1);
+            }
         }
     }
 }

@@ -4,27 +4,30 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class LogicScript : MonoBehaviour
+namespace FlappyBirdDefault
 {
-    public int playerScore;
-    public Text scoreText;
-    public GameObject gameOverScreen;
-
-    [ContextMenu("Increase Score")]
-    public void addScore(int scoreToAdd)
+    public class LogicScript : MonoBehaviour
     {
-        playerScore = playerScore + 1;
-        scoreText.text = playerScore.ToString();
-    }
+        public int playerScore;
+        public Text scoreText;
+        public GameObject gameOverScreen;
 
-    public void restartGame()
-    {
-        if (SceneManager.GetActiveScene().name != "FlappyBirdUpdated")
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+        [ContextMenu("Increase Score")]
+        public void addScore(int scoreToAdd)
+        {
+            playerScore = playerScore + 1;
+            scoreText.text = playerScore.ToString();
+        }
 
-    public void gameOver()
-    {
-        gameOverScreen.SetActive(true);
+        public void restartGame()
+        {
+            if (SceneManager.GetActiveScene().name != "FlappyBirdUpdated")
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        public void gameOver()
+        {
+            gameOverScreen.SetActive(true);
+        }
     }
 }

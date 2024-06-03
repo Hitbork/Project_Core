@@ -1,0 +1,190 @@
+{
+    "layers": [
+        {
+            "layer_id": 10,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 20,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 21,
+            "tiles": [
+                "FinishLine",
+                "FinishLine",
+                "FinishLine",
+                "FinishLine",
+                "FinishLine",
+                "FinishLine"
+            ],
+            "poses_x": [
+                5,
+                5,
+                5,
+                5,
+                5,
+                5
+            ],
+            "poses_y": [
+                -3,
+                -2,
+                -1,
+                0,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": 25,
+            "tiles": [
+                "BounceNESUp",
+                "BounceNESUp",
+                "BounceNESUp",
+                "BounceNESUp",
+                "BounceNESUp",
+                "BounceNESUp",
+                "BounceNESUp",
+                "BounceNESUp",
+                "BounceNESUp"
+            ],
+            "poses_x": [
+                -4,
+                -3,
+                -2,
+                -1,
+                0,
+                1,
+                2,
+                3,
+                4
+            ],
+            "poses_y": [
+                -4,
+                -4,
+                -4,
+                -4,
+                -4,
+                -4,
+                -4,
+                -4,
+                -4
+            ]
+        },
+        {
+            "layer_id": 26,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 27,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 28,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 29,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 30,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 31,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 32,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 50,
+            "tiles": [
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground"
+            ],
+            "poses_x": [
+                -7,
+                -6,
+                -5,
+                -4,
+                -3,
+                -2,
+                -1,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12
+            ],
+            "poses_y": [
+                -5,
+                -5,
+                -5,
+                -5,
+                -5,
+                -5,
+                -5,
+                -5,
+                -5,
+                -5,
+                -5,
+                -5,
+                -5,
+                -5,
+                -5,
+                -5,
+                -5,
+                -5,
+                -5,
+                -5
+            ]
+        }
+    ]
+}
