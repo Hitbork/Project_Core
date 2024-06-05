@@ -15,7 +15,7 @@ namespace FlappyBirdUpdated
     {
         public class LevelManager : MonoBehaviour
         {
-            private LevelData levelData = new LevelData("TestLevel");
+            private LevelData levelData = new LevelData();
             public static LevelManager instance;
 
             [SerializeField] TMP_Text levelNameField, levelNameText;
