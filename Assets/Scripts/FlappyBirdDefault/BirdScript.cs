@@ -21,31 +21,35 @@ namespace FlappyBirdDefault
         // Update is called once per frame
         void Update()
         {
-            if (this.transform.position.y > 17)
+            // If bird reached top of screen player gets death
+            if (this.transform.position.y > logic.mainCam.topBorder)
             {
-                birdIsAlive = false;
-                logic.gameOver();
+                DeathOfPlayer();
                 return;
             }
 
-            if (this.transform.position.y < -17)
+            // If bird reached bottom of screen player gets death
+            if (this.transform.position.y < logic.mainCam.bottomBorder)
             {
-                birdIsAlive = false;
-                logic.gameOver();
+                DeathOfPlayer();
                 Destroy(this);
                 return;
             }
 
+            // Making the bird jump as player hits spacebar
             if (Input.GetKeyDown(KeyCode.Space) && birdIsAlive)
             {
                 myRigidBody.velocity = Vector2.up * flapStrength;
             }
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        // Death of player in classic flappy bird always calls gameOver method
+        private void DeathOfPlayer()
         {
-            logic.gameOver();
             birdIsAlive = false;
+            logic.gameOver();
         }
+
+        private void OnCollisionEnter2D(Collision2D collision) => DeathOfPlayer();
     }
 }

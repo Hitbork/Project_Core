@@ -1,5 +1,15 @@
+/* This namespace is used to access data, that might be needed in scene.
+ * 
+ * Planned in the future:
+ * - this data would be saved and loaded locally;
+ * - this data would be saved and loaded on the server; */
 namespace LoadSceneData
 {
+    /* !! This namespace is not usable yet. !!
+     * 
+     * In this namespace is planned to be information
+     * about player and player's progress,
+     * such as levels opened to him. */
     namespace User
     {
         public class UserData
@@ -19,6 +29,7 @@ namespace LoadSceneData
 
     namespace Level
     {
+        // This class contains all needed data about level, while loading it. 
         public class LevelData
         {
             public LevelName levelName = new LevelName();
@@ -38,7 +49,10 @@ namespace LoadSceneData
                     set
                     {
                         this.value = value;
-                        IsIncorrect();
+                        CheckForCorrectness();
+
+                        if (!isIncorrect)
+                            ClearErrorMessage();
                     }
                 }
 
@@ -50,8 +64,9 @@ namespace LoadSceneData
 
                 public bool isLengthIncorrect { get; private set; } = false;
 
+                public string errorMessage { get; private set; } = string.Empty;
 
-                private string value, errorMessage = string.Empty;
+                private string value;
 
                 private static int minLength = 4, maxLength = 16;
 
@@ -75,7 +90,7 @@ namespace LoadSceneData
                     this.value = defaultLevelName;
                 }
 
-                public void ClearErrorMessage() => errorMessage = string.Empty;
+                private void ClearErrorMessage() => errorMessage = string.Empty;
 
                 private bool IsDefault()
                 {
@@ -121,23 +136,14 @@ namespace LoadSceneData
                     return isEmpty;
                 }
 
-                private bool IsIncorrect()
+                private void CheckForCorrectness()
                 {
                     isIncorrect = IsEmpty() || this.IsDefault() || this.IsLengthIncorrect();
-                    return isIncorrect;
                 }
 
                 public string GetErrorMessage()
                 {
-                    string err = this.errorMessage;
-
-                    if (!string.IsNullOrEmpty(err))
-                    {
-                        ClearErrorMessage();
-                        return err;
-                    }
-
-                    return string.Empty;
+                    return this.errorMessage;
                 }
             }
         }

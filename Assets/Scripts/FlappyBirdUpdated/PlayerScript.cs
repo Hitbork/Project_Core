@@ -22,12 +22,14 @@ namespace FlappyBirdUpdated
         // Update is called once per frame
         void Update()
         {
-            if (myRigidBody2D.velocity.x > 5.0f && birdIsAlive)
+            // Bird always tends to the same speed
+            if (myRigidBody2D.velocity.x > speed && birdIsAlive)
             {
                 myRigidBody2D.velocity -= Vector2.right * 2f * Time.deltaTime;
             }
 
-            if (myRigidBody2D.velocity.x < 5.0f && birdIsAlive)
+            // Bird always tends to the same speed
+            if (myRigidBody2D.velocity.x < speed && birdIsAlive)
             {
                 myRigidBody2D.velocity += Vector2.right * 2f * Time.deltaTime;
             }
@@ -38,13 +40,12 @@ namespace FlappyBirdUpdated
             }
         }
 
-        public void SetBirdUnactive()
-        {
-            birdIsAlive = false;
-        }
+        public void SetBirdUnactive() => birdIsAlive = false;
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
+            // Check if collision was collision of gameobject with GroundLayer tag.
+            // All other collision logics are written in their scripts
             if (collision.gameObject.tag == "GroundLayer" && birdIsAlive)
             {
                 logic.gameOver();

@@ -2,44 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraScript : MonoBehaviour
+namespace FlappyBirdUpdated
 {
-    private Transform player = null;
-
-    // Start is called before the first frame update
-    void Start()
+    public class CameraScript : MonoBehaviour
     {
-        SetPlayer();
-    }
+        private Transform player = null;
 
-    private void SetPlayer()
-    {
-        try
-        {
-            player = GameObject.FindGameObjectWithTag("Player").transform;
-        }
-        catch
-        {
-            Debug.Log("Camera hasn't found the player");
-        }
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (player == null)
+        // Start is called before the first frame update
+        void Start()
         {
             SetPlayer();
         }
 
-        if (player != null)
+        private void SetPlayer()
         {
-            Vector3 temp = transform.position;
-            temp.x = player.position.x;
-            temp.y = player.position.y;
+            try
+            {
+                player = GameObject.FindGameObjectWithTag("Player").transform;
+            }
+            catch
+            {
+                Debug.Log("Camera hasn't found the player");
+            }
 
-            transform.position = temp;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (player == null)
+            {
+                SetPlayer();
+            }
+
+            if (player != null)
+            {
+                // Setting new position of camera
+                Vector3 temp = transform.position;
+                temp.x = player.position.x;
+                temp.y = player.position.y;
+
+                transform.position = temp;
+            }
         }
     }
 }

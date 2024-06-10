@@ -18,40 +18,31 @@ namespace FlappyBirdUpdated
             scoreText.text = playerScore.ToString();
         }
    
-        public void restartGame()
-        {
-            if (!SceneManager.GetActiveScene().name.Contains("FlappyBirdUpdated"))
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
+        public void restartGame() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
    
-        public void gameOver()
-        {
-            gameOverScreen.SetActive(true);
-        }
+        public void gameOver() => gameOverScreen.SetActive(true);
    
-        public void FinishGame()
-        {
-            gameFinishScreen.SetActive(true);
-        }
+        public void FinishGame() =>  gameFinishScreen.SetActive(true);
 
         public void PlayNextLevel()
         {
+            // This method is used while playing default levels
+            // Getting current scene name
             string currentSceneName = SceneManager.GetActiveScene().name;
-            int currentLevelNumber = (int)char.GetNumericValue(currentSceneName[currentSceneName.Length - 1]);
-            int nextLevelNumber = currentLevelNumber + 1;
+            
+            // Setting next level number by trimming last digit from current scene name 
+            int nextLevelNumber = (int)char.GetNumericValue(currentSceneName[currentSceneName.Length - 1]) + 1;
+
+            // Setting next level scene name by remove last digit from current and adding string form of next number level
             string nextLevelSceneName = currentSceneName.Remove(currentSceneName.Length - 1) + nextLevelNumber.ToString();
+
+            // Opening the scene
             SceneManager.LoadScene(nextLevelSceneName);
         }
 
-        public void OpenLevelsMenu()
-        {
-            SceneManager.LoadScene("LevelsMenu");
-        }
+        public void OpenLevelsMenu() => SceneManager.LoadScene("LevelsMenu");
 
-        public void OpenMainMenu()
-        {
-            SceneManager.LoadScene("MainMenu");
-        }
+        public void OpenMainMenu() => SceneManager.LoadScene("MainMenu");
     }
 }
 

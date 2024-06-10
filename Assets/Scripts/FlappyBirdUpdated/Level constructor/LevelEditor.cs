@@ -30,8 +30,8 @@ namespace FlappyBirdUpdated
                 }
             }
     
-            // Using TileBase instead of Tile in case we may
-            // use TileRule types of tiles in the future
+            /* Using TileBase instead of Tile in case we may
+             * use TileRule types of tiles in the future */
             TileBase currentTile 
             {
                 get 
@@ -53,6 +53,7 @@ namespace FlappyBirdUpdated
 
                 ChangeCurrentUITileImage();
             }
+
             private void Update()
             {
                 Vector3Int pos = currentTilemap.WorldToCell(cam.ScreenToWorldPoint(Input.mousePosition));
@@ -100,10 +101,7 @@ namespace FlappyBirdUpdated
                 Debug.Log($"Selected tile: {LevelManager.instance.tiles[_selectedTileIndex].name}");
             }
 
-            public void ChangeCurrentUITileImage()
-            {
-                currentTileImage.sprite = LevelManager.instance.tiles[_selectedTileIndex].sprite;
-            }
+            public void ChangeCurrentUITileImage() => currentTileImage.sprite = LevelManager.instance.tiles[_selectedTileIndex].sprite;
 
             public void ScalingCamera(int scalingNumber)
             {
@@ -142,15 +140,9 @@ namespace FlappyBirdUpdated
                 cam.transform.position = cameraPosition;
             }
 
-            void PlaceTile(Vector3Int pos)
-            {
-                currentTilemap.SetTile(pos, currentTile);
-            }
+            void PlaceTile(Vector3Int pos) => currentTilemap.SetTile(pos, currentTile);
 
-            void DeleteTile(Vector3Int pos)
-            {
-                currentTilemap.SetTile(pos, null);
-            }
+            void DeleteTile(Vector3Int pos) => currentTilemap.SetTile(pos, null);
         }
     }
 }

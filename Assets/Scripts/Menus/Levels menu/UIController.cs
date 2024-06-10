@@ -10,7 +10,8 @@ namespace levelsMenu
     public class UIController : MonoBehaviour
     {
         [SerializeField] GameObject AccessToLevelDeniedPrefab;
-
+        
+        // This variable is temporaly setted in case of testing
         private bool[] activeLevels;
 
         private GameObject[] levelButtons;
@@ -30,6 +31,7 @@ namespace levelsMenu
             SetActiveLevels();
         }
 
+        // This method is temporaly used in case of testing
         private void SetArrayOfActiveLevels(int amountOfOpenLevels)
         {
             activeLevels = new bool[levelButtons.Length];
@@ -45,12 +47,15 @@ namespace levelsMenu
         {
             int index = 0;
 
+            // Searching the index of first unactive level
             while (activeLevels[index] && index != activeLevels.Length - 1)
                 index++;
 
+            // Returning from method in case there are no unactive levels
             if (index == activeLevels.Length - 1)
                 return;
 
+            // For each unactive level turning off button and initiliazing the accessDenied picture on it
             for (int i = index; i < levelButtons.Length; i++)
             {
                 levelButtons[i].GetComponent<Button>().interactable = false;
@@ -60,8 +65,10 @@ namespace levelsMenu
 
         public void LevelButtonClick()
         {
+            // Getting scene name to open by getting three last digits "btn" from button's name down
             string sceneName = EventSystem.current.currentSelectedGameObject.name.Remove(EventSystem.current.currentSelectedGameObject.name.Length - 3);
 
+            // Checking if level is active by getting last char of sceneName and searching for it's index in active levels array
             if (activeLevels[((int)char.GetNumericValue(sceneName[sceneName.Length - 1]))-1])
                 SceneManager.LoadScene(sceneName);
             else

@@ -107,7 +107,7 @@ namespace FlappyBirdUpdated
                     SavingLevelUI.SetActive(false);
                 } else
                 {
-                    ShowError(levelData.levelName.GetErrorMessage());
+                    ShowError(levelData.levelName.errorMessage);
                 }
             }
 
