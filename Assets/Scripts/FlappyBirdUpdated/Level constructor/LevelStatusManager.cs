@@ -78,7 +78,10 @@ namespace FlappyBirdUpdated
                     if (!currentGameObject.CompareTag("MainCamera"))
                         Instantiate(currentGameObject, new Vector3(0, 0, 0), transform.rotation);
                     else
+                    {
                         Instantiate(currentGameObject, new Vector3(0, 0, -10), transform.rotation);
+                        currentGameObject.GetComponent<Camera>().orthographicSize = 6;
+                    }
 
                     // Adding tags of object so we may destroy it later
                     tagsOfObjectsToDestroy.Add(currentGameObject.tag);

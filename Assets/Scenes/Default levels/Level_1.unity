@@ -227,6 +227,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 556729380837488264, guid: 416a8bcc86ad6e444a228fa1d0f3da7c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 556729380837488264, guid: 416a8bcc86ad6e444a228fa1d0f3da7c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 556729380837488264, guid: 416a8bcc86ad6e444a228fa1d0f3da7c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9
+      objectReference: {fileID: 0}
+    - target: {fileID: 785202424476809734, guid: 416a8bcc86ad6e444a228fa1d0f3da7c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 785202424476809734, guid: 416a8bcc86ad6e444a228fa1d0f3da7c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 785202424476809734, guid: 416a8bcc86ad6e444a228fa1d0f3da7c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9
+      objectReference: {fileID: 0}
     - target: {fileID: 2232746961848799706, guid: 416a8bcc86ad6e444a228fa1d0f3da7c, type: 3}
       propertyPath: m_Name
       value: Bird

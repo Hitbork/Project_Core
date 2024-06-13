@@ -3448,6 +3448,7 @@ MonoBehaviour:
   gameObjectsForTestingToInstantiate:
   - {fileID: 3469552578839017487, guid: 49ff9187722a9624795814977ce12894, type: 3}
   - {fileID: 3036519997998328075, guid: 76d0ceca162d0f54fb2c6bf636dcb246, type: 3}
+  - {fileID: 6773712094529966551, guid: b75286c0e60903c449718d2689ed3aa7, type: 3}
   gameObjectsForEditingToSetUnactive:
   - {fileID: 699086574}
   - {fileID: 19183297}
@@ -7841,7 +7842,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5171170924886019864, guid: a6ae12f25e259ed4684c4eecb905362c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 5171170924886019864, guid: a6ae12f25e259ed4684c4eecb905362c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7849,15 +7850,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5171170924886019864, guid: a6ae12f25e259ed4684c4eecb905362c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5171170924886019864, guid: a6ae12f25e259ed4684c4eecb905362c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5171170924886019864, guid: a6ae12f25e259ed4684c4eecb905362c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5171170924886019864, guid: a6ae12f25e259ed4684c4eecb905362c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

@@ -12,6 +12,7 @@ TagManager:
   - LevelStatusManger
   - Undefined
   - LevelStatusManager
+  - CinemachineCamera
   layers:
   - Default
   - TransparentFX

@@ -7,6 +7,10 @@ namespace FlappyBirdUpdated
     public class CameraScript : MonoBehaviour
     {
         private Transform player = null;
+        public Vector3 offset;
+        public float damping;
+
+        private Vector3 velocity = Vector3.zero;
 
         // Start is called before the first frame update
         void Start()
@@ -35,15 +39,8 @@ namespace FlappyBirdUpdated
                 SetPlayer();
             }
 
-            if (player != null)
-            {
-                // Setting new position of camera
-                Vector3 temp = transform.position;
-                temp.x = player.position.x;
-                temp.y = player.position.y;
-
-                transform.position = temp;
-            }
+            Vector3 movePosition = player.position + offset;
+            transform.position = Vector3.SmoothDamp(transform.position, movePosition, ref velocity, damping);
         }
     }
 }
