@@ -26,19 +26,29 @@ namespace FlappyBirdUpdated
 
             [SerializeField] Image selectedTileImage; 
 
+            public List<CustomTile> tiles = new List<CustomTile>();
+            [SerializeField] List<Tilemap> tilemaps = new List<Tilemap>();
+            public Dictionary<int, Tilemap> layers = new Dictionary<int, Tilemap>();
+
             // Using awake, because it's always called before Start() functions
             // So we may use LevelManager.cs script to set up references between another scripts
             private void Awake()
             {
+                // If instance of this script is already in the scene
+                // destroying creating duplicate
                 if (instance == null) instance = this;
                 else Destroy(this);
 
+                // For each seriliazable tilemap
                 foreach (Tilemap tilemap in tilemaps)
                 {
+                    // Searching in pairs of enum tilemaps
                     foreach (Tilemaps num in System.Enum.GetValues(typeof(Tilemaps)))
                     {
+                        // If pair has been found
                         if (tilemap.name == num.ToString())
                         {
+                            // Adding the layer to dictionary with its order number (defined in enum Tilemaps)
                             if (!layers.ContainsKey((int)num)) layers.Add((int)num, tilemap);
                         }
                     }
@@ -60,11 +70,7 @@ namespace FlappyBirdUpdated
                 levelNameField.text = levelData.levelName.Value;
             }
 
-            public List<CustomTile> tiles = new List<CustomTile>();
-            [SerializeField] List<Tilemap> tilemaps = new List<Tilemap>();
-            public Dictionary<int, Tilemap> layers = new Dictionary<int, Tilemap>();
-
-
+            // Enum used to define order of tilemaps
             public enum Tilemaps
             {
                 Sky = 10,
@@ -99,6 +105,7 @@ namespace FlappyBirdUpdated
 
             public void AcceptingSavingLevelButtonClick()
             {
+                // Setting levelname.Value string as player typed in the window
                 levelData.levelName.Value = levelNameText.text;
 
                 if (!levelData.levelName.isIncorrect)

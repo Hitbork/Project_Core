@@ -64,9 +64,8 @@ namespace LoadSceneData
 
                 public bool isLengthIncorrect { get; private set; } = false;
 
-                public string errorMessage { get; private set; } = string.Empty;
-
                 private string value;
+                public string errorMessage { get; private set; } = string.Empty;
 
                 private static int minLength = 4, maxLength = 16;
 

@@ -9,6 +9,8 @@ namespace FlappyBirdUpdated
     {
         public class LevelStatusManager : MonoBehaviour
         {
+            // In case to have not issues while turning on objects
+            // Level editor's turning on/off separatly
             private LevelEditor levelEditor;
 
             [SerializeField]
@@ -34,6 +36,7 @@ namespace FlappyBirdUpdated
                 if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.M) && isEditingMode) TurnOnTestableMode();
                 if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.L) && !isEditingMode) TurnOnEditingMode();
             }
+
             public void TurnOnTestableMode()
             {
                 EventSystemDeactivateModule();
@@ -59,9 +62,11 @@ namespace FlappyBirdUpdated
             {
                 foreach (string name in tagsOfObjectsToDestroy)
                 {
+                    // Destroying objects finding it by tags
                     Destroy(GameObject.FindGameObjectWithTag(name));
                 }
 
+                // Clearing list for next objects
                 tagsOfObjectsToDestroy.Clear();
             }
 
@@ -69,14 +74,18 @@ namespace FlappyBirdUpdated
             {
                 foreach (GameObject currentGameObject in gameObjects)
                 {
+                    // Instatiating objects with exception for cameras
                     if (!currentGameObject.CompareTag("MainCamera"))
                         Instantiate(currentGameObject, new Vector3(0, 0, 0), transform.rotation);
                     else
                         Instantiate(currentGameObject, new Vector3(0, 0, -10), transform.rotation);
+
+                    // Adding tags of object so we may destroy it later
                     tagsOfObjectsToDestroy.Add(currentGameObject.tag);
                 }
             }
 
+            // Separate method to set unactive objects
             private void SetUnactive(List<GameObject> gameObjects)
             {
                 foreach (GameObject currentGameObject in gameObjects)
@@ -85,6 +94,8 @@ namespace FlappyBirdUpdated
                 }
             }
 
+            // If we want to set active objects to edit - boolean = true,
+            // otherwise objects to test will be set active
             private void SetActiveForEditing(bool boolean)
             {
                 foreach (GameObject currentGameObject in gameObjectsForTestingToSetActive)
@@ -106,6 +117,8 @@ namespace FlappyBirdUpdated
                     TurnOnTestableMode();
             }
 
+            // Deactivating current input module of EventSystem
+            // to be sure player will not activate input by spacebar 
             private static void EventSystemDeactivateModule()
             {
                 EventSystem currentEventSystem = EventSystem.current;
