@@ -1,0 +1,163 @@
+{
+    "layers": [
+        {
+            "layer_id": 10,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 20,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 21,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 25,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 26,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 27,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 28,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 29,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 30,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 31,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 32,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 49,
+            "tiles": [],
+            "poses_x": [],
+            "poses_y": []
+        },
+        {
+            "layer_id": 50,
+            "tiles": [
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground",
+                "Ground"
+            ],
+            "poses_x": [
+                -7,
+                -4,
+                -3,
+                -2,
+                -1,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                6,
+                7,
+                8,
+                8,
+                9,
+                9,
+                9,
+                10,
+                10,
+                10,
+                10,
+                10,
+                11,
+                11
+            ],
+            "poses_y": [
+                -4,
+                -5,
+                -5,
+                -5,
+                -5,
+                -5,
+                -5,
+                -5,
+                -5,
+                -5,
+                -5,
+                -5,
+                -4,
+                -4,
+                -4,
+                1,
+                -4,
+                0,
+                1,
+                -4,
+                -3,
+                -2,
+                -1,
+                0,
+                -3,
+                -2
+            ]
+        }
+    ]
+}

@@ -23,8 +23,11 @@ namespace LoadSceneData
 
         public abstract void ReadSavingInfo();
 
+        public void ClearSavingData() => savingData = new SavingData();
+
         public virtual void Save()
         {
+            ClearSavingData();
             AddSavingInfo();
 
             BinaryFormatter bf = new BinaryFormatter();
@@ -36,6 +39,7 @@ namespace LoadSceneData
 
         public virtual void Load()
         {
+            ClearSavingData();
             if (!File.Exists(Application.persistentDataPath + $"/{nameOfSavingFile}.dat"))
                 Save();
 
