@@ -15,10 +15,11 @@ namespace FlappyBirdUpdated
     {
         public class LevelManager : MonoBehaviour
         {
-            private LevelData levelData = new LevelData("suka");
+            private LevelData levelData = new LevelData("vshik");
             public static LevelManager instance;
 
-            [SerializeField] TMP_Text levelNameField, levelNameText;
+            [SerializeField] TMP_Text levelNameField;
+            [SerializeField] TMP_InputField levelNameTextInputField;
             [SerializeField] GameObject SavingLevelUI, loadLevelButton;
 
             [SerializeField] TMP_Text errorField;
@@ -106,8 +107,8 @@ namespace FlappyBirdUpdated
             public void AcceptingSavingLevelButtonClick()
             {
                 // Setting levelname.Value string as player typed in the window
-                // Also deleting last invisible character of string 
-                levelData.levelName.Value = levelNameText.text.Substring(0, levelNameText.text.Length - 1);
+                levelData.levelName.Value = levelNameTextInputField.text;
+
 
                 if (!levelData.levelName.isIncorrect)
                 {
