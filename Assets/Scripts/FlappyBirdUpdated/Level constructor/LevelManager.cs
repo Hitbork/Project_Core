@@ -15,7 +15,7 @@ namespace FlappyBirdUpdated
     {
         public class LevelManager : MonoBehaviour
         {
-            private LevelData levelData = new LevelData();
+            private LevelData levelData = new LevelData("suka");
             public static LevelManager instance;
 
             [SerializeField] TMP_Text levelNameField, levelNameText;
@@ -106,7 +106,8 @@ namespace FlappyBirdUpdated
             public void AcceptingSavingLevelButtonClick()
             {
                 // Setting levelname.Value string as player typed in the window
-                levelData.levelName.Value = levelNameText.text;
+                // Also deleting last invisible character of string 
+                levelData.levelName.Value = levelNameText.text.Substring(0, levelNameText.text.Length - 1);
 
                 if (!levelData.levelName.isIncorrect)
                 {
@@ -196,6 +197,7 @@ namespace FlappyBirdUpdated
                 }
                 catch (Exception ex)
                 {
+                    Debug.Log("File hasn't been found");
                     Debug.Log(ex.Message);
                     return;
                 }
