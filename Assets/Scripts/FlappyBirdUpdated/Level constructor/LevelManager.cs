@@ -15,7 +15,7 @@ namespace FlappyBirdUpdated
     {
         public class LevelManager : MonoBehaviour
         {
-            private LevelData levelData = new LevelData("vshik");
+            private LevelData levelData = new LevelData();
             public static LevelManager instance;
 
             [SerializeField] TMP_Text levelNameField;
@@ -54,6 +54,8 @@ namespace FlappyBirdUpdated
                         }
                     }
                 }
+
+                //levelData.Load();
 
                 // Adding UI if name is not default
                 if (!levelData.levelName.isIncorrect)
@@ -181,6 +183,7 @@ namespace FlappyBirdUpdated
                 File.WriteAllText(Application.dataPath + $"/LevelsOfUser/{levelData.levelName.Value}.json", json);
 
                 loadLevelButton.SetActive(true);
+                levelData.Save();
 
                 Debug.Log("Level was saved");
             }

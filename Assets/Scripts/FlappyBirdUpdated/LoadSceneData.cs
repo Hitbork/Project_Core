@@ -3,8 +3,56 @@
  * Planned in the future:
  * - this data would be saved and loaded locally;
  * - this data would be saved and loaded on the server; */
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
+
 namespace LoadSceneData
 {
+    public abstract class SavingClass
+    {
+        public SavingData savingData = new SavingData();
+
+        public abstract void AddSavingInfo();
+
+        public abstract void ReadSavingInfo();
+
+        public virtual void Save()
+        {
+            AddSavingInfo();
+
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Create(Application.persistentDataPath + "/LevelData.dat");
+            bf.Serialize(file, this.savingData);
+            file.Close();
+            Debug.Log("File saved!");
+        }
+
+        public virtual void Load()
+        {
+            if (File.Exists(Application.persistentDataPath + "/LevelData.dat"))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Open(Application.persistentDataPath + "/LevelData.dat", FileMode.Open);
+                this.savingData = (SavingData)bf.Deserialize(file);
+                file.Close();
+                Debug.Log("Game data loaded!");
+            }
+            else
+                Debug.LogError("There is no save data!");
+
+            ReadSavingInfo();
+        }
+
+        [Serializable]
+        public class SavingData
+        {
+            public List<string> strings = new List<string>();
+        }
+    }
+
     /* !! This namespace is not usable yet. !!
      * 
      * In this namespace is planned to be information
@@ -30,7 +78,7 @@ namespace LoadSceneData
     namespace Level
     {
         // This class contains all needed data about level, while loading it. 
-        public class LevelData
+        public class LevelData : SavingClass
         {
             public LevelName levelName = new LevelName();
 
@@ -39,6 +87,16 @@ namespace LoadSceneData
             public LevelData(string levelNameValue)
             {
                 this.levelName = new LevelName(levelNameValue);
+            }
+
+            public override void AddSavingInfo()
+            {
+                this.savingData.strings.Add(this.levelName.Value);
+            }
+
+            public override void ReadSavingInfo()
+            {
+                this.levelName.Value = this.savingData.strings[0];
             }
 
             public class LevelName
