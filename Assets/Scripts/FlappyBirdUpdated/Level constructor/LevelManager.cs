@@ -15,7 +15,7 @@ namespace FlappyBirdUpdated
     {
         public class LevelManager : MonoBehaviour
         {
-            private LevelData levelData = new LevelData("vshik");
+            private LevelData levelData = new LevelData();
             public static LevelManager instance;
 
             [SerializeField] TMP_Text levelNameField;
@@ -30,6 +30,25 @@ namespace FlappyBirdUpdated
             public List<CustomTile> tiles = new List<CustomTile>();
             [SerializeField] List<Tilemap> tilemaps = new List<Tilemap>();
             public Dictionary<int, Tilemap> layers = new Dictionary<int, Tilemap>();
+
+            // Enum used to define order of tilemaps
+            public enum Tilemaps
+            {
+                Sky = 10,
+                Background = 20,
+                FinishLine = 21,
+                BounceNESUp = 25,
+                BounceNESUpRight = 26,
+                BounceNESRight = 27,
+                BounceNESDownRight = 28,
+                BounceNESDown = 29,
+                BounceNESDownLeft = 30,
+                BounceNESLeft = 31,
+                BounceNESUpLeft = 32,
+                BounceRight = 33,
+                TouchableGround = 49,
+                Ground = 50
+            }
 
             // Using awake, because it's always called before Start() functions
             // So we may use LevelManager.cs script to set up references between another scripts
@@ -55,6 +74,9 @@ namespace FlappyBirdUpdated
                     }
                 }
 
+                // Loading leveldata from file
+                levelData.Load();
+
                 // Adding UI if name is not default
                 if (!levelData.levelName.isIncorrect)
                 {
@@ -66,44 +88,11 @@ namespace FlappyBirdUpdated
                 ChangeUILevelData();
             }
 
-            private void ChangeUILevelData()
-            {
-                levelNameField.text = levelData.levelName.Value;
-            }
-
-            // Enum used to define order of tilemaps
-            public enum Tilemaps
-            {
-                Sky = 10,
-                Background = 20,
-                FinishLine = 21,
-                BounceNESUp = 25,
-                BounceNESUpRight = 26,
-                BounceNESRight = 27,
-                BounceNESDownRight = 28,
-                BounceNESDown = 29,
-                BounceNESDownLeft = 30,
-                BounceNESLeft = 31,
-                BounceNESUpLeft = 32,
-                BounceRight = 33,
-                TouchableGround = 49,
-                Ground = 50
-            }
-
             private void Update()
             {
                 if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.A)) SaveLevelEvent();
                 if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.D)) LoadLevel(); 
             }
-
-            public void SaveLevelEvent()
-            {
-                if (levelData.levelName.isIncorrect)
-                    SavingLevelUI.SetActive(true);
-                else 
-                    SaveLevel();
-            }
-
             public void AcceptingSavingLevelButtonClick()
             {
                 // Setting levelname.Value string as player typed in the window
@@ -120,6 +109,11 @@ namespace FlappyBirdUpdated
                 }
             }
 
+            private void ChangeUILevelData()
+            {
+                levelNameField.text = levelData.levelName.Value;
+            }
+
             public void CancelingSavingLevelButtonClick()
             {
                 SavingLevelUI.SetActive(false);
@@ -130,11 +124,56 @@ namespace FlappyBirdUpdated
                 errorUI.SetActive(false);
             }
 
+            public void SaveLevelEvent()
+            {
+                if (levelData.levelName.isIncorrect)
+                    SavingLevelUI.SetActive(true);
+                else 
+                    SaveLevel();
+            }
+
             private void ShowError(string errMessage)
             {
                 errorField.text = $"'{errMessage}'"; 
                 errorUI.SetActive(true);
             }
+
+            void LoadLevel()
+            {
+                LevelInfo levelInfo = new LevelInfo();
+
+                try
+                {
+                    // Load the json file to a leveldata
+                    string json = File.ReadAllText(Application.dataPath + $"/LevelsOfUser/{levelData.levelName.Value}.json");
+                    levelInfo = JsonUtility.FromJson<LevelInfo>(json);
+                    Debug.Log("File found succesfully");
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log("File hasn't been found");
+                    Debug.Log(ex.Message);
+                    return;
+                }
+
+                foreach (var data in levelInfo.layers)
+                {
+                    if (!layers.TryGetValue(data.layer_id, out Tilemap tilemap)) break;
+
+                    // Clear the tilemap
+                    tilemap.ClearAllTiles();
+
+                    // Place the tiles
+                    for (int i = 0; i < data.tiles.Count; i++)
+                    {
+                        TileBase tile = tiles.Find(t => t.id == data.tiles[i]).tile;
+                        if (tile) tilemap.SetTile(new Vector3Int(data.poses_x[i], data.poses_y[i], 0), tile);
+                    }
+                }
+
+                Debug.Log("Level loaded");
+            }
+
             void SaveLevel()
             {
                 ChangeUILevelData();
@@ -181,45 +220,9 @@ namespace FlappyBirdUpdated
                 File.WriteAllText(Application.dataPath + $"/LevelsOfUser/{levelData.levelName.Value}.json", json);
 
                 loadLevelButton.SetActive(true);
+                levelData.Save();
 
                 Debug.Log("Level was saved");
-            }
-
-            void LoadLevel()
-            {
-                LevelInfo levelInfo = new LevelInfo();
-
-                try
-                {
-                    // Load the json file to a leveldata
-                    string json = File.ReadAllText(Application.dataPath + $"/LevelsOfUser/{levelData.levelName.Value}.json");
-                    levelInfo = JsonUtility.FromJson<LevelInfo>(json);
-                    Debug.Log("File found succesfully");
-                }
-                catch (Exception ex)
-                {
-                    Debug.Log("File hasn't been found");
-                    Debug.Log(ex.Message);
-                    return;
-                }
-
-                foreach (var data in levelInfo.layers)
-                {
-                    if (!layers.TryGetValue(data.layer_id, out Tilemap tilemap)) break;
-
-                    // Clear the tilemap
-                    tilemap.ClearAllTiles();
-
-                    // Place the tiles
-                    for (int i = 0; i < data.tiles.Count; i++)
-                    {
-                        TileBase tile = tiles.Find(t => t.id == data.tiles[i]).tile;
-                        if (tile) tilemap.SetTile(new Vector3Int(data.poses_x[i], data.poses_y[i], 0), tile);
-                    }
-                }
-
-                // Deabugging
-                Debug.Log("Level loaded");
             }
         } 
 

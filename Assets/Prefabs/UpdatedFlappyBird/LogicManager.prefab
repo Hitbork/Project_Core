@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c3e1851f18e47b468103fa3a2193a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInLevelConstructor: 0
   playerScore: 0
   scoreText: {fileID: 0}
   gameOverScreen: {fileID: 0}

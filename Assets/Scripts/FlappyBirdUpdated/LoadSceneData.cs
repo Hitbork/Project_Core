@@ -3,8 +3,68 @@
  * Planned in the future:
  * - this data would be saved and loaded locally;
  * - this data would be saved and loaded on the server; */
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
+
 namespace LoadSceneData
 {
+    public abstract class SavingClass
+    {
+        public string nameOfSavingFile = "SavingClass";
+
+        public SavingData savingData = new SavingData();
+
+        public abstract void ChangeNameOfSavingFile();
+
+        public abstract void AddSavingInfo();
+
+        public abstract void ReadSavingInfo();
+
+        public void ClearSavingData() => savingData = new SavingData();
+
+        public virtual void Save()
+        {
+            ClearSavingData();
+            AddSavingInfo();
+
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Create(Application.persistentDataPath + $"/{nameOfSavingFile}.dat");
+            bf.Serialize(file, this.savingData);
+            file.Close();
+            Debug.Log($"File {nameOfSavingFile}.dat was saved!");
+        }
+
+        public virtual void Load()
+        {
+            ClearSavingData();
+            if (!File.Exists(Application.persistentDataPath + $"/{nameOfSavingFile}.dat"))
+                Save();
+
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + $"/{nameOfSavingFile}.dat", FileMode.Open);
+            this.savingData = (SavingData)bf.Deserialize(file);
+            file.Close();
+            Debug.Log($"File {nameOfSavingFile}.dat was loaded!");
+
+            ReadSavingInfo();
+        }
+
+        public SavingClass()
+        {
+            ChangeNameOfSavingFile();
+        }
+
+        [Serializable]
+        public class SavingData
+        {
+            public List<string> strings = new List<string>();
+            public List<int> ints = new List<int>();
+        }
+    }
+
     /* !! This namespace is not usable yet. !!
      * 
      * In this namespace is planned to be information
@@ -12,17 +72,38 @@ namespace LoadSceneData
      * such as levels opened to him. */
     namespace User
     {
-        public class UserData
+        public class UserData : SavingClass
         {
             public string userName = "unknown",
                 userPassword = "unknown";
 
-            public UserData() { }
+            public int indexOfLastUncoveredLevel = 0;
 
-            public UserData(string name, string password)
+            public UserData() : base() { }
+
+            public UserData(string name, string password) : this()
             {
                 this.userName = name;
                 this.userPassword = password;
+            }
+
+            public override void AddSavingInfo()
+            {
+                this.savingData.strings.Add(this.userName);
+                this.savingData.strings.Add(this.userPassword);
+                this.savingData.ints.Add(this.indexOfLastUncoveredLevel);
+            }
+
+            public override void ChangeNameOfSavingFile()
+            {
+                nameOfSavingFile = "UserData";
+            }
+
+            public override void ReadSavingInfo()
+            {
+                this.userName = this.savingData.strings[0];
+                this.userPassword = this.savingData.strings[1];
+                this.indexOfLastUncoveredLevel = this.savingData.ints[0];
             }
         }
     }
@@ -30,15 +111,30 @@ namespace LoadSceneData
     namespace Level
     {
         // This class contains all needed data about level, while loading it. 
-        public class LevelData
+        public class LevelData : SavingClass
         {
             public LevelName levelName = new LevelName();
 
-            public LevelData() { }
+            public LevelData() : base() { }
 
-            public LevelData(string levelNameValue)
+            public LevelData(string levelNameValue) : this()
             {
                 this.levelName = new LevelName(levelNameValue);
+            }
+
+            public override void AddSavingInfo()
+            {
+                this.savingData.strings.Add(this.levelName.Value);
+            }
+            
+            public override void ChangeNameOfSavingFile()
+            {
+                nameOfSavingFile = "LevelData";
+            }
+
+            public override void ReadSavingInfo()
+            {
+                this.levelName.Value = this.savingData.strings[0];
             }
 
             public class LevelName
