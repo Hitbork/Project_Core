@@ -13,7 +13,11 @@ namespace LoadSceneData
 {
     public abstract class SavingClass
     {
+        public string nameOfSavingFile = "SavingClass";
+
         public SavingData savingData = new SavingData();
+
+        public abstract void ChangeNameOfSavingFile();
 
         public abstract void AddSavingInfo();
 
@@ -24,26 +28,29 @@ namespace LoadSceneData
             AddSavingInfo();
 
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Create(Application.persistentDataPath + "/LevelData.dat");
+            FileStream file = File.Create(Application.persistentDataPath + $"/{nameOfSavingFile}.dat");
             bf.Serialize(file, this.savingData);
             file.Close();
-            Debug.Log("File saved!");
+            Debug.Log($"File {nameOfSavingFile}.dat was saved!");
         }
 
         public virtual void Load()
         {
-            if (File.Exists(Application.persistentDataPath + "/LevelData.dat"))
-            {
-                BinaryFormatter bf = new BinaryFormatter();
-                FileStream file = File.Open(Application.persistentDataPath + "/LevelData.dat", FileMode.Open);
-                this.savingData = (SavingData)bf.Deserialize(file);
-                file.Close();
-                Debug.Log("Game data loaded!");
-            }
-            else
-                Debug.LogError("There is no save data!");
+            if (!File.Exists(Application.persistentDataPath + $"/{nameOfSavingFile}.dat"))
+                Save();
+
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + $"/{nameOfSavingFile}.dat", FileMode.Open);
+            this.savingData = (SavingData)bf.Deserialize(file);
+            file.Close();
+            Debug.Log($"File {nameOfSavingFile}.dat was loaded!");
 
             ReadSavingInfo();
+        }
+
+        public SavingClass()
+        {
+            ChangeNameOfSavingFile();
         }
 
         [Serializable]
@@ -60,17 +67,34 @@ namespace LoadSceneData
      * such as levels opened to him. */
     namespace User
     {
-        public class UserData
+        public class UserData : SavingClass
         {
             public string userName = "unknown",
                 userPassword = "unknown";
 
-            public UserData() { }
+            public UserData() : base() { }
 
-            public UserData(string name, string password)
+            public UserData(string name, string password) : this()
             {
                 this.userName = name;
                 this.userPassword = password;
+            }
+
+            public override void AddSavingInfo()
+            {
+                this.savingData.strings.Add(this.userName);
+                this.savingData.strings.Add(this.userPassword);
+            }
+
+            public override void ChangeNameOfSavingFile()
+            {
+                nameOfSavingFile = "UserData";
+            }
+
+            public override void ReadSavingInfo()
+            {
+                this.userName = this.savingData.strings[0];
+                this.userPassword = this.savingData.strings[1];
             }
         }
     }
@@ -82,9 +106,9 @@ namespace LoadSceneData
         {
             public LevelName levelName = new LevelName();
 
-            public LevelData() { }
+            public LevelData() : base() { }
 
-            public LevelData(string levelNameValue)
+            public LevelData(string levelNameValue) : this()
             {
                 this.levelName = new LevelName(levelNameValue);
             }
@@ -92,6 +116,11 @@ namespace LoadSceneData
             public override void AddSavingInfo()
             {
                 this.savingData.strings.Add(this.levelName.Value);
+            }
+            
+            public override void ChangeNameOfSavingFile()
+            {
+                nameOfSavingFile = "LevelData";
             }
 
             public override void ReadSavingInfo()
