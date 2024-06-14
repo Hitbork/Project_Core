@@ -57,6 +57,7 @@ namespace LoadSceneData
         public class SavingData
         {
             public List<string> strings = new List<string>();
+            public List<int> ints = new List<int>();
         }
     }
 
@@ -72,6 +73,8 @@ namespace LoadSceneData
             public string userName = "unknown",
                 userPassword = "unknown";
 
+            public int indexOfLastUncoveredLevel = 0;
+
             public UserData() : base() { }
 
             public UserData(string name, string password) : this()
@@ -84,6 +87,7 @@ namespace LoadSceneData
             {
                 this.savingData.strings.Add(this.userName);
                 this.savingData.strings.Add(this.userPassword);
+                this.savingData.ints.Add(this.indexOfLastUncoveredLevel);
             }
 
             public override void ChangeNameOfSavingFile()
@@ -95,6 +99,7 @@ namespace LoadSceneData
             {
                 this.userName = this.savingData.strings[0];
                 this.userPassword = this.savingData.strings[1];
+                this.indexOfLastUncoveredLevel = this.savingData.ints[0];
             }
         }
     }
