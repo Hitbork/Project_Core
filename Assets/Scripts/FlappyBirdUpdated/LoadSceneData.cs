@@ -67,7 +67,7 @@ namespace LoadSceneData
                 private string value;
                 public string errorMessage { get; private set; } = string.Empty;
 
-                private static int minLength = 4, maxLength = 16;
+                private static int minLength = 3, maxLength = 16;
 
                 private static string defaultLevelName = "unknown";
 
@@ -111,7 +111,7 @@ namespace LoadSceneData
                         isLengthIncorrect = true;
 
                         if (this.value.Length < minLength)
-                            errorMessage = $"Level name must be at least {minLength-1} digits!";
+                            errorMessage = $"Level name must be at least {minLength} digits!";
                         else
                             errorMessage = $"Level name must be less or equals to {maxLength} digits!";
                     }
