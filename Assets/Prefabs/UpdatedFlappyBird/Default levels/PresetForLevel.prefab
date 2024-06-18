@@ -267,6 +267,10 @@ PrefabInstance:
       propertyPath: gameFinishScreen
       value: 
       objectReference: {fileID: 2375750398209979251}
+    - target: {fileID: 8509826140522761108, guid: b2c6eaa775c9dd24ba545f24667c3db4, type: 3}
+      propertyPath: playNextLevelButton
+      value: 
+      objectReference: {fileID: 2375750398294966129}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2c6eaa775c9dd24ba545f24667c3db4, type: 3}
 --- !u!4 &7979766533982832261 stripped
@@ -314,11 +318,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982502617385604935, guid: ed582a4fec0b060488b318bbaca6ad7e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.03333354
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982502617385604935, guid: ed582a4fec0b060488b318bbaca6ad7e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.011772003
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982502617385604935, guid: ed582a4fec0b060488b318bbaca6ad7e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -660,6 +664,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6830625117895039146, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7037178866876936642, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
       propertyPath: m_Name
       value: UI
@@ -752,6 +760,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7720546080376770109, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9206192758191857015}
+    - target: {fileID: 7720546080376770109, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: restartGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 7720546080376770109, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FlappyBirdUpdated.LogicScript, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7720546080376770109, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
 --- !u!114 &1466837626671071705 stripped
@@ -768,6 +792,11 @@ MonoBehaviour:
 --- !u!1 &2375750398209979251 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2224976822747310565, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+  m_PrefabInstance: {fileID: 4474582173891484310}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2375750398294966129 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2224976822796674535, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
   m_PrefabInstance: {fileID: 4474582173891484310}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &6895569730451295658 stripped

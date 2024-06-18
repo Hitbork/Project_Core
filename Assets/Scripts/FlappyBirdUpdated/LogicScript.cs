@@ -13,13 +13,19 @@ namespace FlappyBirdUpdated
         public bool isInLevelConstructor = false;
         public int playerScore;
         public TMP_Text scoreText;
-        public GameObject gameOverScreen, gameFinishScreen;
+        public GameObject gameOverScreen, gameFinishScreen, playNextLevelButton;
 
         private void Start()
         {
             userData.Load();
 
             isInLevelConstructor = SceneManager.GetActiveScene().name == "LevelConstructor";
+        }
+
+        private void Update()
+        {
+            if (!isInLevelConstructor)
+                if (Input.GetKeyDown(KeyCode.R)) restartGame();
         }
 
         [ContextMenu("Increase Score")]
@@ -39,7 +45,7 @@ namespace FlappyBirdUpdated
             {
                 int indexOfCurrentLevel = GetLevelNumber() - 1;
 
-                if (userData.indexOfLastUncoveredLevel == indexOfCurrentLevel)
+                if (userData.indexOfLastUncoveredLevel <= indexOfCurrentLevel)
                 {
                     userData.indexOfLastUncoveredLevel = indexOfCurrentLevel + 1;
                     userData.Save();
@@ -47,6 +53,9 @@ namespace FlappyBirdUpdated
             }
 
             gameFinishScreen.SetActive(true);
+
+            if (GetLevelNumber() == 9)
+                playNextLevelButton.SetActive(false);
         }
 
         private int GetLevelNumber()
