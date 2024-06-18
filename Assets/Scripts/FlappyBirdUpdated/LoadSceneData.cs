@@ -51,7 +51,7 @@ namespace LoadSceneData
 
             ReadSavingInfo();
         }
-
+        
         public SavingClass()
         {
             ChangeNameOfSavingFile();
@@ -85,6 +85,7 @@ namespace LoadSceneData
             {
                 this.userName = name;
                 this.userPassword = password;
+                ClearSavingData();
             }
 
             public override void AddSavingInfo()

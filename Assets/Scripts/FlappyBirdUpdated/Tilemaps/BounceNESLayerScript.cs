@@ -64,7 +64,7 @@ namespace FlappyBirdUpdated
                 // Direction: Downwards-right
                 case "BounceNESDownRight":
                     tempVector.x = 15;
-                    tempVector.y = 15;
+                    tempVector.y = -15;
                     break;
 
                 // Direction: Downwards
