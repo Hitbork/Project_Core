@@ -145,7 +145,8 @@ namespace FlappyBirdUpdated
                 try
                 {
                     // Load the json file to a leveldata
-                    string json = File.ReadAllText(Application.dataPath + $"/LevelsOfUser/{levelData.levelName.Value}.json");
+                    string pathOfSavingDirectory = Application.persistentDataPath + "/LevelsOfUser";
+                    string json = File.ReadAllText(pathOfSavingDirectory + $"/{levelData.levelName.Value}.json");
                     levelInfo = JsonUtility.FromJson<LevelInfo>(json);
                     Debug.Log("File found succesfully");
                 }
@@ -215,9 +216,13 @@ namespace FlappyBirdUpdated
 
                 }
 
+                string pathOfSavingDirectory = Application.persistentDataPath + "/LevelsOfUser";
+                if (!Directory.Exists(pathOfSavingDirectory))
+                    Directory.CreateDirectory(pathOfSavingDirectory);
+
                 // Save the data as json
                 string json = JsonUtility.ToJson(levelInfo, true);
-                File.WriteAllText(Application.dataPath + $"/LevelsOfUser/{levelData.levelName.Value}.json", json);
+                File.WriteAllText(pathOfSavingDirectory + $"/{levelData.levelName.Value}.json", json);
 
                 loadLevelButton.SetActive(true);
                 levelData.Save();

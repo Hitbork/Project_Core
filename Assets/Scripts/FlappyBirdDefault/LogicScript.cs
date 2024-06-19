@@ -7,7 +7,7 @@ using TMPro;
 
 namespace FlappyBirdDefault
 {
-    public class LogicScript : MonoBehaviour
+    public class LogicScript : UIControllerClass
     {
         public int playerScore;
         public TMP_Text scoreText;

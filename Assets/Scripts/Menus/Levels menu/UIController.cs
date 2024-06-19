@@ -8,7 +8,7 @@ using LoadSceneData.User;
 
 namespace levelsMenu
 {
-    public class UIController : MonoBehaviour
+    public class UIController : UIControllerClass
     {
         UserData userData = new UserData();
 
@@ -51,7 +51,7 @@ namespace levelsMenu
             string sceneName = EventSystem.current.currentSelectedGameObject.name.Remove(EventSystem.current.currentSelectedGameObject.name.Length - 3);
 
             // Checking if level is active by getting last char of sceneName and searching for it's index in active levels array
-            if (((int)char.GetNumericValue(sceneName[sceneName.Length - 1]))-1 >= userData.indexOfLastUncoveredLevel)
+            if (((int)char.GetNumericValue(sceneName[sceneName.Length - 1]))-1 <= userData.indexOfLastUncoveredLevel)
                 SceneManager.LoadScene(sceneName);
             else
                 Debug.Log("Level can't be opened");

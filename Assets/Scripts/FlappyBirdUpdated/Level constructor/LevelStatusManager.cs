@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 namespace FlappyBirdUpdated
 {
     namespace LevelConstructor
     {
-        public class LevelStatusManager : MonoBehaviour
+        public class LevelStatusManager : UIControllerClass
         {
             // In case to have not issues while turning on objects
             // Level editor's turning on/off separatly
@@ -128,6 +129,8 @@ namespace FlappyBirdUpdated
                 if (currentEventSystem.currentInputModule != null)
                     currentEventSystem.currentInputModule.DeactivateModule();
             }
+
+            public void OpenLevelConstructorMenu() => SceneManager.LoadScene("LevelConstructorMenu");
         }
     }
 }
