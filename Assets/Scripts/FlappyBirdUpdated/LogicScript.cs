@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using LoadSceneData.User;
+using System.Globalization;
 
 namespace FlappyBirdUpdated
 {
@@ -16,7 +17,7 @@ namespace FlappyBirdUpdated
         public GameObject gameOverScreen, gameFinishScreen, playNextLevelButton;
 
         private double timer = 0;
-        private bool isLevelFinished = false;
+        private bool isGameEnded = false;
 
         private void Start()
         {
@@ -29,33 +30,34 @@ namespace FlappyBirdUpdated
         {
             timer += Time.deltaTime;
 
-            if (!isLevelFinished)
-                updateTime();
+            if (!isGameEnded)
+                UpdateTime();
 
             if (!isInLevelConstructor)
-                if (Input.GetKeyDown(KeyCode.R)) restartGame();
+                if (Input.GetKeyDown(KeyCode.R)) RestartGame();
         }
 
         [ContextMenu("Increase Score")]
-        public void updateTime() => scoreText.text = System.Math.Round(timer, 1).ToString();
+        public void UpdateTime() => scoreText.text = System.Math.Round(timer, 1).ToString("0.0", CultureInfo.InvariantCulture);
    
-        public void restartGame() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-   
-        public void gameOver() => gameOverScreen.SetActive(true);
+        public void RestartGame() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        public void GameOver()
+        {
+            isGameEnded = true;
+
+            gameOverScreen.SetActive(true);
+        }
 
         public void FinishGame()
         {
-            isLevelFinished = true;
+            isGameEnded = true;
 
             if (!isInLevelConstructor)
             {
                 int indexOfCurrentLevel = GetLevelNumber() - 1;
 
-                if (userData.indexOfLastUncoveredLevel <= indexOfCurrentLevel)
-                {
-                    userData.indexOfLastUncoveredLevel = indexOfCurrentLevel + 1;
-                    userData.Save();
-                }
+                 userData.LevelFinished(indexOfCurrentLevel, timer);
             }
 
             gameFinishScreen.SetActive(true);

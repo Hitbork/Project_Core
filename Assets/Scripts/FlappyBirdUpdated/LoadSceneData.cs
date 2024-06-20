@@ -60,8 +60,9 @@ namespace LoadSceneData
         [Serializable]
         public class SavingData
         {
-            public List<string> strings = new List<string>();
             public List<int> ints = new List<int>();
+            public List<string> strings = new List<string>();
+            public List<double[]> doubleArrays = new List<double[]>();
         }
     }
 
@@ -79,13 +80,39 @@ namespace LoadSceneData
 
             public int indexOfLastUncoveredLevel = 0;
 
+            public double[] timeRecordsInLevels = new double[10];
+
             public UserData() : base() { }
 
             public UserData(string name, string password) : this()
             {
                 this.userName = name;
                 this.userPassword = password;
-                ClearSavingData();
+            }
+
+            public void LevelFinished(int finishedLevelIndex)
+            {
+                CheckForOpeningNewLevel(finishedLevelIndex);
+                this.Save();
+            }
+
+            public void LevelFinished(int finishedLevelIndex, double currentTime)
+            {
+                LevelFinished(finishedLevelIndex);
+                CheckForNewRecord(currentTime, finishedLevelIndex);
+                this.Save();
+            }
+
+            private void CheckForOpeningNewLevel(int indexOfLevel)
+            {
+                if (this.indexOfLastUncoveredLevel == indexOfLevel)
+                    this.indexOfLastUncoveredLevel++;
+            }
+
+            private void CheckForNewRecord(double currentTime, int indexOfLevel)
+            {
+                if (this.timeRecordsInLevels[indexOfLevel] > currentTime || this.timeRecordsInLevels[indexOfLevel] == 0)
+                    this.timeRecordsInLevels[indexOfLevel] = currentTime;
             }
 
             public override void AddSavingInfo()
@@ -93,6 +120,7 @@ namespace LoadSceneData
                 this.savingData.strings.Add(this.userName);
                 this.savingData.strings.Add(this.userPassword);
                 this.savingData.ints.Add(this.indexOfLastUncoveredLevel);
+                this.savingData.doubleArrays.Add(this.timeRecordsInLevels);
             }
 
             public override void ChangeNameOfSavingFile()
@@ -105,6 +133,7 @@ namespace LoadSceneData
                 this.userName = this.savingData.strings[0];
                 this.userPassword = this.savingData.strings[1];
                 this.indexOfLastUncoveredLevel = this.savingData.ints[0];
+                this.timeRecordsInLevels = this.savingData.doubleArrays[0];
             }
         }
     }

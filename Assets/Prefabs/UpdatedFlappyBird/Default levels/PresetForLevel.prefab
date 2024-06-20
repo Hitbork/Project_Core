@@ -508,6 +508,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7612796818944251212}
     m_Modifications:
+    - target: {fileID: 541616455672786174, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_Name
+      value: PlayAgainBtn
+      objectReference: {fileID: 0}
     - target: {fileID: 2084326591789927688, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -526,7 +530,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2084326591789927688, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: restartGame
+      value: RestartGame
       objectReference: {fileID: 0}
     - target: {fileID: 2084326591789927688, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -549,6 +553,22 @@ PrefabInstance:
       value: PlayNextLevel
       objectReference: {fileID: 0}
     - target: {fileID: 2224976822796674533, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FlappyBirdUpdated.LogicScript, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2224976823438837433, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2224976823438837433, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9206192758191857015}
+    - target: {fileID: 2224976823438837433, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RestartGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 2224976823438837433, guid: d8fd9dd8d961d014b81a7bb32739c3da, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: FlappyBirdUpdated.LogicScript, Assembly-CSharp
       objectReference: {fileID: 0}
