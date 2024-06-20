@@ -15,6 +15,9 @@ namespace FlappyBirdUpdated
         public TMP_Text scoreText;
         public GameObject gameOverScreen, gameFinishScreen, playNextLevelButton;
 
+        private double timer = 0;
+        private bool isLevelFinished = false;
+
         private void Start()
         {
             userData.Load();
@@ -24,16 +27,17 @@ namespace FlappyBirdUpdated
 
         private void Update()
         {
+            timer += Time.deltaTime;
+
+            if (!isLevelFinished)
+                updateTime();
+
             if (!isInLevelConstructor)
                 if (Input.GetKeyDown(KeyCode.R)) restartGame();
         }
 
         [ContextMenu("Increase Score")]
-        public void addScore(int scoreToAdd)
-        {
-            playerScore = playerScore + 1;
-            scoreText.text = playerScore.ToString();
-        }
+        public void updateTime() => scoreText.text = System.Math.Round(timer, 1).ToString();
    
         public void restartGame() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
    
@@ -41,6 +45,8 @@ namespace FlappyBirdUpdated
 
         public void FinishGame()
         {
+            isLevelFinished = true;
+
             if (!isInLevelConstructor)
             {
                 int indexOfCurrentLevel = GetLevelNumber() - 1;
