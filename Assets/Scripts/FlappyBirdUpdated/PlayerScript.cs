@@ -48,7 +48,7 @@ namespace FlappyBirdUpdated
             // All other collision logics are written in their scripts
             if (collision.gameObject.tag == "GroundLayer" && birdIsAlive)
             {
-                logic.gameOver();
+                logic.GameOver();
                 SetBirdUnactive();
             }
         }

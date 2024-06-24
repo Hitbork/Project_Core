@@ -11,6 +11,11 @@ using UnityEngine;
 
 namespace LoadSceneData
 {
+    public abstract class Info
+    {
+        public static int amountOfLevels = 9;
+    }
+
     public abstract class SavingClass
     {
         public string nameOfSavingFile = "SavingClass";
@@ -60,8 +65,10 @@ namespace LoadSceneData
         [Serializable]
         public class SavingData
         {
-            public List<string> strings = new List<string>();
+            public List<bool> bools = new List<bool>();
             public List<int> ints = new List<int>();
+            public List<string> strings = new List<string>();
+            public List<double[]> doubleArrays = new List<double[]>();
         }
     }
 
@@ -77,34 +84,81 @@ namespace LoadSceneData
             public string userName = "unknown",
                 userPassword = "unknown";
 
-            public int indexOfLastUncoveredLevel = 0;
+            public bool isCheatSaving { get; private set; } = false; 
+
+            public bool isNewRecordSetted { get; private set; } = false;
+
+            public int indexOfLastUncoveredLevel { get; private set; } = 0;
+
+            public double[] timeRecordsInLevels = new double[Info.amountOfLevels];
 
             public UserData() : base() { }
+
+            public UserData(bool creatingCheatSaving) : this()
+            {
+                this.isCheatSaving = creatingCheatSaving;
+                
+                if (this.isCheatSaving)
+                {
+                    this.indexOfLastUncoveredLevel = Info.amountOfLevels;
+                    this.userName = "cheat";
+                    this.userPassword = "cheat";
+                }
+            }
 
             public UserData(string name, string password) : this()
             {
                 this.userName = name;
                 this.userPassword = password;
-                ClearSavingData();
+            }
+
+            public void LevelFinished(int finishedLevelIndex)
+            {
+                CheckForOpeningNewLevel(finishedLevelIndex);
+                this.Save();
+            }
+
+            public void LevelFinished(int finishedLevelIndex, double currentTime)
+            {
+                LevelFinished(finishedLevelIndex);
+                CheckForNewRecord(currentTime, finishedLevelIndex);
+                this.Save();
+            }
+
+            private void CheckForOpeningNewLevel(int indexOfLevel)
+            {
+                if (this.indexOfLastUncoveredLevel == indexOfLevel)
+                    this.indexOfLastUncoveredLevel++;
+            }
+
+            private void CheckForNewRecord(double currentTime, int indexOfLevel)
+            {
+                this.isNewRecordSetted = this.timeRecordsInLevels[indexOfLevel] > currentTime || this.timeRecordsInLevels[indexOfLevel] == 0;
+
+                if (isNewRecordSetted) this.timeRecordsInLevels[indexOfLevel] = currentTime;
             }
 
             public override void AddSavingInfo()
             {
+                this.savingData.bools.Add(this.isCheatSaving);
                 this.savingData.strings.Add(this.userName);
                 this.savingData.strings.Add(this.userPassword);
                 this.savingData.ints.Add(this.indexOfLastUncoveredLevel);
+                this.savingData.doubleArrays.Add(this.timeRecordsInLevels);
             }
 
             public override void ChangeNameOfSavingFile()
             {
-                nameOfSavingFile = "UserData";
+                this.nameOfSavingFile = "UserData";
             }
 
             public override void ReadSavingInfo()
             {
+                this.isCheatSaving = this.savingData.bools[0];
                 this.userName = this.savingData.strings[0];
                 this.userPassword = this.savingData.strings[1];
                 this.indexOfLastUncoveredLevel = this.savingData.ints[0];
+                this.timeRecordsInLevels = this.savingData.doubleArrays[0];
             }
         }
     }
@@ -130,7 +184,7 @@ namespace LoadSceneData
             
             public override void ChangeNameOfSavingFile()
             {
-                nameOfSavingFile = "LevelData";
+                this.nameOfSavingFile = "LevelData";
             }
 
             public override void ReadSavingInfo()
