@@ -2942,6 +2942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ff8e5e8c82e5a2438e61b74a006a56e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TimeText: {fileID: 4839428615974111000, guid: fcc0929fa9cffd940843d1178b6e6185, type: 3}
   AccessToLevelDeniedPrefab: {fileID: 6791682480765217624, guid: 166f1d07bca168f4b9665f8370e83409, type: 3}
 --- !u!1 &2054946685
 GameObject:

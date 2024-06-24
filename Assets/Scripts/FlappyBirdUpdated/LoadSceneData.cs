@@ -11,6 +11,11 @@ using UnityEngine;
 
 namespace LoadSceneData
 {
+    public abstract class Info
+    {
+        public static int amountOfLevels = 9;
+    }
+
     public abstract class SavingClass
     {
         public string nameOfSavingFile = "SavingClass";
@@ -60,6 +65,7 @@ namespace LoadSceneData
         [Serializable]
         public class SavingData
         {
+            public List<bool> bools = new List<bool>();
             public List<int> ints = new List<int>();
             public List<string> strings = new List<string>();
             public List<double[]> doubleArrays = new List<double[]>();
@@ -78,11 +84,27 @@ namespace LoadSceneData
             public string userName = "unknown",
                 userPassword = "unknown";
 
-            public int indexOfLastUncoveredLevel = 0;
+            public bool isCheatSaving { get; private set; } = false; 
 
-            public double[] timeRecordsInLevels = new double[10];
+            public bool isNewRecordSetted { get; private set; } = false;
+
+            public int indexOfLastUncoveredLevel { get; private set; } = 0;
+
+            public double[] timeRecordsInLevels = new double[Info.amountOfLevels];
 
             public UserData() : base() { }
+
+            public UserData(bool creatingCheatSaving) : this()
+            {
+                this.isCheatSaving = creatingCheatSaving;
+                
+                if (this.isCheatSaving)
+                {
+                    this.indexOfLastUncoveredLevel = Info.amountOfLevels;
+                    this.userName = "cheat";
+                    this.userPassword = "cheat";
+                }
+            }
 
             public UserData(string name, string password) : this()
             {
@@ -111,12 +133,14 @@ namespace LoadSceneData
 
             private void CheckForNewRecord(double currentTime, int indexOfLevel)
             {
-                if (this.timeRecordsInLevels[indexOfLevel] > currentTime || this.timeRecordsInLevels[indexOfLevel] == 0)
-                    this.timeRecordsInLevels[indexOfLevel] = currentTime;
+                this.isNewRecordSetted = this.timeRecordsInLevels[indexOfLevel] > currentTime || this.timeRecordsInLevels[indexOfLevel] == 0;
+
+                if (isNewRecordSetted) this.timeRecordsInLevels[indexOfLevel] = currentTime;
             }
 
             public override void AddSavingInfo()
             {
+                this.savingData.bools.Add(this.isCheatSaving);
                 this.savingData.strings.Add(this.userName);
                 this.savingData.strings.Add(this.userPassword);
                 this.savingData.ints.Add(this.indexOfLastUncoveredLevel);
@@ -125,11 +149,12 @@ namespace LoadSceneData
 
             public override void ChangeNameOfSavingFile()
             {
-                nameOfSavingFile = "UserData";
+                this.nameOfSavingFile = "UserData";
             }
 
             public override void ReadSavingInfo()
             {
+                this.isCheatSaving = this.savingData.bools[0];
                 this.userName = this.savingData.strings[0];
                 this.userPassword = this.savingData.strings[1];
                 this.indexOfLastUncoveredLevel = this.savingData.ints[0];
@@ -159,7 +184,7 @@ namespace LoadSceneData
             
             public override void ChangeNameOfSavingFile()
             {
-                nameOfSavingFile = "LevelData";
+                this.nameOfSavingFile = "LevelData";
             }
 
             public override void ReadSavingInfo()

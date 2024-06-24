@@ -16,10 +16,7 @@ namespace MainMenu
 
         private void CheatSavingData()
         {
-            UserData userData = new UserData();
-            userData.indexOfLastUncoveredLevel = 10;
-            userData.userName = "cheat";
-            userData.userPassword = "cheat";
+            UserData userData = new UserData(true);
             userData.Save();
         }
 

@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using LoadSceneData.User;
+using TMPro;
 
 namespace levelsMenu
 {
@@ -12,6 +11,7 @@ namespace levelsMenu
     {
         UserData userData = new UserData();
 
+        [SerializeField] GameObject TimeText;
         [SerializeField] GameObject AccessToLevelDeniedPrefab;
         private int amountOfLevels = 10;
 
@@ -32,10 +32,22 @@ namespace levelsMenu
 
             amountOfLevels = levelButtons.Length;
 
-            SetActiveLevels();
+            SetRecords();
+            SetUnactiveLevels();
         }
 
-        private void SetActiveLevels()
+        private void SetRecords()
+        {
+            // For each active level showing time record of player
+            for (int i = 0; i < userData.indexOfLastUncoveredLevel + 1 && i < LoadSceneData.Info.amountOfLevels; i++)
+            {
+                GameObject go = Instantiate(TimeText, levelButtons[i].transform);
+                go.transform.SetParent(levelButtons[i].transform);
+                go.GetComponent<TMP_Text>().text = $"Time: {System.Math.Round(userData.timeRecordsInLevels[i], 2).ToString("0.00", System.Globalization.CultureInfo.InvariantCulture)}";
+            }
+        }
+
+        private void SetUnactiveLevels()
         {
             // For each unactive level turning off button and initiliazing the accessDenied picture on it
             for (int i = userData.indexOfLastUncoveredLevel + 1; i < amountOfLevels; i++)
