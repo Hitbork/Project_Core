@@ -49,3 +49,6 @@ MonoBehaviour:
   scoreText: {fileID: 0}
   gameOverScreen: {fileID: 0}
   gameFinishScreen: {fileID: 0}
+  playNextLevelButton: {fileID: 0}
+  currentTimeTxt: {fileID: 0}
+  timeRecordTxt: {fileID: 0}

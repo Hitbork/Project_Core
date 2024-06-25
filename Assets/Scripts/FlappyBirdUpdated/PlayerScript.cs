@@ -1,6 +1,8 @@
+using FlappyBirdUpdated.LevelConstructor;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 
 namespace FlappyBirdUpdated
@@ -11,10 +13,12 @@ namespace FlappyBirdUpdated
         public float speed = 5.0f;
         public LogicScript logic;
         public bool birdIsAlive { get; private set; } = true;
+        [SerializeField] public SomeManager someManager;
 
         // Start is called before the first frame update
         void Start()
         {
+            someManager = GameObject.Find("SomeManager").GetComponent<SomeManager>();
             logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
             myRigidBody2D.velocity = Vector2.right * speed;
         }
@@ -48,8 +52,16 @@ namespace FlappyBirdUpdated
             // All other collision logics are written in their scripts
             if (collision.gameObject.tag == "GroundLayer" && birdIsAlive)
             {
-                logic.GameOver();
-                SetBirdUnactive();
+                ContactPoint2D contact = collision.contacts[0];
+
+                if (someManager.IsDead(collision.gameObject, contact.point))
+                {
+                    logic.GameOver();
+                    SetBirdUnactive();
+                } else
+                {
+                    myRigidBody2D.velocity = new Vector2(-15, 0);
+                }
             }
         }
     }
