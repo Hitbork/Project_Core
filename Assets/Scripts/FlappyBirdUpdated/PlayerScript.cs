@@ -2,6 +2,7 @@ using FlappyBirdUpdated.LevelConstructor;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Tilemaps;
 
 
@@ -52,16 +53,9 @@ namespace FlappyBirdUpdated
             // All other collision logics are written in their scripts
             if (collision.gameObject.tag == "GroundLayer" && birdIsAlive)
             {
-                ContactPoint2D contact = collision.contacts[0];
+                someManager.GetEvent(collision, out UnityEvent currentEvent);
 
-                if (someManager.IsDead(collision.gameObject, contact.point))
-                {
-                    logic.GameOver();
-                    SetBirdUnactive();
-                } else
-                {
-                    myRigidBody2D.velocity = new Vector2(-15, 0);
-                }
+                currentEvent.Invoke();
             }
         }
     }

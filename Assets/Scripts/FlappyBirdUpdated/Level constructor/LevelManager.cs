@@ -17,6 +17,8 @@ namespace FlappyBirdUpdated
         {
             private LevelData levelData = new LevelData();
             public static LevelManager instance;
+            [SerializeField] bool isInConstructor;
+            [SerializeField] GameObject grid;
 
             [SerializeField] TMP_Text levelNameField;
             [SerializeField] TMP_InputField levelNameTextInputField;
@@ -59,39 +61,72 @@ namespace FlappyBirdUpdated
                 if (instance == null) instance = this;
                 else Destroy(this);
 
-                // For each seriliazable tilemap
-                foreach (Tilemap tilemap in tilemaps)
+                if (isInConstructor)
                 {
-                    // Searching in pairs of enum tilemaps
-                    foreach (Tilemaps num in System.Enum.GetValues(typeof(Tilemaps)))
+                    tiles = CustomTileManager.instance.tiles;
+
+                    // For each seriliazable tilemap
+                    foreach (Tilemap tilemap in tilemaps)
                     {
-                        // If pair has been found
-                        if (tilemap.name == num.ToString())
+                        // Searching in pairs of enum tilemaps
+                        foreach (Tilemaps num in System.Enum.GetValues(typeof(Tilemaps)))
                         {
-                            // Adding the layer to dictionary with its order number (defined in enum Tilemaps)
-                            if (!layers.ContainsKey((int)num)) layers.Add((int)num, tilemap);
+                            // If pair has been found
+                            if (tilemap.name == num.ToString())
+                            {
+                                // Adding the layer to dictionary with its order number (defined in enum Tilemaps)
+                                if (!layers.ContainsKey((int)num)) layers.Add((int)num, tilemap);
+                            }
+                        }
+                    }
+
+                    // Loading leveldata from file
+                    levelData.Load();
+
+                    // Adding UI if name is not default
+                    if (!levelData.levelName.isIncorrect)
+                    {
+                        LoadLevel();
+                        loadLevelButton.SetActive(true);
+                    }
+
+                    // Changing UI about level
+                    ChangeUILevelData();
+                } else
+                {
+                    Tilemap[] tempTilemaps = grid.GetComponentsInChildren<Tilemap>();
+
+                    Debug.Log($"Amount of tilemaps founded: {tempTilemaps.Length}");
+
+                    foreach (Tilemap tilemap in grid.GetComponentsInChildren<Tilemap>())
+                    {
+                        tilemaps.Add(tilemap);
+                    }
+
+                    // For each seriliazable tilemap
+                    foreach (Tilemap tilemap in tilemaps)
+                    {
+                        // Searching in pairs of enum tilemaps
+                        foreach (Tilemaps num in Enum.GetValues(typeof(Tilemaps)))
+                        {
+                            // If pair has been found
+                            if (tilemap.name == num.ToString())
+                            {
+                                // Adding the layer to dictionary with its order number (defined in enum Tilemaps)
+                                if (!layers.ContainsKey((int)num)) layers.Add((int)num, tilemap);
+                            }
                         }
                     }
                 }
-
-                // Loading leveldata from file
-                levelData.Load();
-
-                // Adding UI if name is not default
-                if (!levelData.levelName.isIncorrect)
-                {
-                    LoadLevel();
-                    loadLevelButton.SetActive(true);
-                }
-
-                // Changing UI about level
-                ChangeUILevelData();
             }
 
             private void Update()
             {
-                if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.A)) SaveLevelEvent();
-                if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.D)) LoadLevel(); 
+                if (isInConstructor)
+                {
+                    if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.A)) SaveLevelEvent();
+                    if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.D)) LoadLevel(); 
+                }
             }
             public void AcceptingSavingLevelButtonClick()
             {

@@ -13,5 +13,6 @@ namespace FlappyBirdUpdated
         public Sprite sprite;
         public string id;
         public LevelManager.Tilemaps tilemap;
+        public string logic;
     }
 }

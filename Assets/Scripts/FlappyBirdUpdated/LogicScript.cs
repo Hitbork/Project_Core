@@ -47,6 +47,8 @@ namespace FlappyBirdUpdated
         {
             isGameEnded = true;
 
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().SetBirdUnactive();
+
             gameOverScreen.SetActive(true);
         }
 
