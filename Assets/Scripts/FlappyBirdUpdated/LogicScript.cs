@@ -61,7 +61,12 @@ namespace FlappyBirdUpdated
 
         public void FinishGame()
         {
+            PlayerScript playerScript = player.GetComponent<PlayerScript>();
+
+            if (!playerScript.birdIsAlive) return;
+
             isGameEnded = true;
+            playerScript.SetBirdUnactive();
 
             if (!isInLevelConstructor)
             {
@@ -105,6 +110,8 @@ namespace FlappyBirdUpdated
 
             player.GetComponent<Rigidbody2D>().velocity = bounceDirection;
         }
+
+        public void Contact() => Debug.Log("There is a contact with non-killing object");
 
         public void PlayNextLevel()
         {

@@ -14,7 +14,7 @@ namespace FlappyBirdUpdated
             logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
         }
 
-        public CustomTile GetCustomTile(GameObject tilemapGameObject, Vector3 vector)
+        private CustomTile GetCustomTile(GameObject tilemapGameObject, Vector3 vector)
         {
             TileBase tileBase = tilemapGameObject.GetComponent<Tilemap>().GetTile(Vector3Int.FloorToInt(vector));
             CustomTile currentCustomTile = CustomTileManager.instance.tiles[0];
@@ -51,6 +51,18 @@ namespace FlappyBirdUpdated
             {
                 logic.SetBounceDirection(collisionedTileLogic.Substring(4));
                 unityEvent.AddListener(logic.BouncePlayer);
+                return;
+            }
+
+            if (collisionedTileLogic == "UD")
+            {
+                unityEvent.AddListener(logic.Contact);
+                return;
+            }
+
+            if (collisionedTileLogic == "F")
+            {
+                unityEvent.AddListener(logic.FinishGame);
                 return;
             }
         }
