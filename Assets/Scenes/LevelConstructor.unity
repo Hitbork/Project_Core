@@ -2872,7 +2872,7 @@ GameObject:
   - component: {fileID: 804858487}
   - component: {fileID: 804858490}
   m_Layer: 0
-  m_Name: FinishLine
+  m_Name: Triggers
   m_TagString: GroundLayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

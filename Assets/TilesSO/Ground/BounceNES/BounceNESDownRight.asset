@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad0bda4b9e4fd534b84799128be69dff, type: 3}
-  m_Name: BounceNESUp
+  m_Name: BounceNESDownRight
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: 63d327ea3773c8e4086642c6bfb3bd1e, type: 2}
-  sprite: {fileID: 1429271012, guid: 87f5e774f757246478a7742adfa9001f, type: 3}
-  id: BounceNESUp
-  tilemap: 25
+  tile: {fileID: 11400000, guid: 262fe4c0a35c4ca4eb0c2a36635d0738, type: 2}
+  sprite: {fileID: 1121833095, guid: 080970b2a3681ba40a7423d72e045485, type: 3}
+  id: BounceNESDownRight
+  tilemap: 50
+  logic: BNESDR

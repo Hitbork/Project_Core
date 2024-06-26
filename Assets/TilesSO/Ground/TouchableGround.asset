@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad0bda4b9e4fd534b84799128be69dff, type: 3}
-  m_Name: BounceNESDown
+  m_Name: TouchableGround
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: 08206329e7bacc4488d00bac98c6a94e, type: 2}
-  sprite: {fileID: 1800265085, guid: 87f5e774f757246478a7742adfa9001f, type: 3}
-  id: BounceNESDown
-  tilemap: 29
+  tile: {fileID: 11400000, guid: 519ef39c27a72c146b8f47a434d93831, type: 2}
+  sprite: {fileID: 21300000, guid: 74b858fdba93ea246a6a882cd2fb8174, type: 3}
+  id: TouchableGround
+  tilemap: 50
+  logic: UD

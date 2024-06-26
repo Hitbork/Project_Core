@@ -38,17 +38,7 @@ namespace FlappyBirdUpdated
             {
                 Sky = 10,
                 Background = 20,
-                FinishLine = 21,
-                BounceNESUp = 25,
-                BounceNESUpRight = 26,
-                BounceNESRight = 27,
-                BounceNESDownRight = 28,
-                BounceNESDown = 29,
-                BounceNESDownLeft = 30,
-                BounceNESLeft = 31,
-                BounceNESUpLeft = 32,
-                BounceRight = 33,
-                TouchableGround = 49,
+                Triggers = 21,
                 Ground = 50
             }
 
