@@ -17,14 +17,21 @@ namespace FlappyBirdUpdated
         public GameObject gameOverScreen, gameFinishScreen, playNextLevelButton;
         public GameObject currentTimeTxt, timeRecordTxt;
 
-        private double timer = 0;
+        public float velocityOfBNES = 15;
+
+        public GameObject player;
+
         private bool isGameEnded = false;
+        private double timer = 0;
+        private Vector2 bounceDirection = new Vector2(-20, -20);
 
         private void Start()
         {
             userData.Load();
 
             isInLevelConstructor = SceneManager.GetActiveScene().name == "LevelConstructor";
+
+            SetPlayerGO();
         }
 
         private void Update()
@@ -40,7 +47,7 @@ namespace FlappyBirdUpdated
 
         [ContextMenu("Increase Score")]
         public void UpdateTime() => scoreText.text = System.Math.Round(timer, 2).ToString("0.00", CultureInfo.InvariantCulture);
-   
+
         public void RestartGame() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
         public void GameOver()
@@ -74,7 +81,7 @@ namespace FlappyBirdUpdated
             currentTimeTxt.GetComponent<TMP_Text>().text = $"Current time: {System.Math.Round(timer, 2).ToString("0.00", CultureInfo.InvariantCulture)}";
 
             // Showing time record
-            timeRecordTxt.GetComponent<TMP_Text>().text = $"Time record: {System.Math.Round(userData.timeRecordsInLevels[GetLevelNumber()-1], 2).ToString("0.00", CultureInfo.InvariantCulture)}!";
+            timeRecordTxt.GetComponent<TMP_Text>().text = $"Time record: {System.Math.Round(userData.timeRecordsInLevels[GetLevelNumber() - 1], 2).ToString("0.00", CultureInfo.InvariantCulture)}!";
 
             // Toggling off "play next level" button if it is last level
             if (GetLevelNumber() == 9)
@@ -91,6 +98,14 @@ namespace FlappyBirdUpdated
             return (int)char.GetNumericValue(currentSceneName[currentSceneName.Length - 1]);
         }
 
+        public void BouncePlayer()
+        {
+            if (player == null)
+                SetPlayerGO();
+
+            player.GetComponent<Rigidbody2D>().velocity = bounceDirection;
+        }
+
         public void PlayNextLevel()
         {
             // This method is used while playing default levels
@@ -104,6 +119,57 @@ namespace FlappyBirdUpdated
 
             // Opening the scene
             SceneManager.LoadScene(nextLevelSceneName);
+        }
+
+        private void SetPlayerGO()
+        {
+            try
+            {
+                player = GameObject.FindGameObjectWithTag("Player");
+            }
+            catch
+            {
+                Debug.Log("SomeManager hasn't found the playerGO");
+            }
+        }
+
+        public void SetBounceDirection(string BNESLogic)
+        {
+            float x = 0, y = 0;
+
+            switch (BNESLogic)
+            {
+                case "U":
+                    y = velocityOfBNES;
+                    break;
+                case "UR":
+                    x = velocityOfBNES;
+                    y = velocityOfBNES;
+                    break;
+                case "R":
+                    x = velocityOfBNES;
+                    break;
+                case "DR":
+                    x = velocityOfBNES;
+                    y = -1 * velocityOfBNES;
+                    break;
+                case "D":
+                    y = -1 * velocityOfBNES;
+                    break;
+                case "DL":
+                    x = -1 * velocityOfBNES;
+                    y = -1 * velocityOfBNES;
+                    break;
+                case "L":
+                    x = -1 * velocityOfBNES;
+                    break;
+                case "UL":
+                    x = -1 * velocityOfBNES;
+                    y = velocityOfBNES;
+                    break;
+            }
+
+            bounceDirection = new Vector2(x, y);
         }
 
         public void OpenLevelsMenu() => SceneManager.LoadScene("LevelsMenu");
