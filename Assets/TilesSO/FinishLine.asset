@@ -16,3 +16,4 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 68d1c7d5961d0304f9839008dfd4560b, type: 3}
   id: FinishLine
   tilemap: 21
+  logic: F

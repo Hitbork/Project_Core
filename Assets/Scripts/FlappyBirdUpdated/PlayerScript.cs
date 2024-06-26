@@ -21,6 +21,7 @@ namespace FlappyBirdUpdated
         {
             someManager = GameObject.Find("SomeManager").GetComponent<SomeManager>();
             logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
+            if (logic.isInLevelConstructor) logic.StartGame();
             myRigidBody2D.velocity = Vector2.right * speed;
         }
 
@@ -57,6 +58,15 @@ namespace FlappyBirdUpdated
 
                 currentEvent.Invoke();
             }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            UnityEvent currentEvent = new UnityEvent();
+
+            currentEvent.AddListener(logic.FinishGame);
+
+            currentEvent.Invoke();
         }
     }
 }

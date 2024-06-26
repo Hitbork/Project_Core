@@ -44,19 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701ae1c5b02dfbe4eb984b4df1b1fed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiles:
-  - {fileID: 11400000, guid: bf2f74b4fa730134db7511fd7553425a, type: 2}
-  - {fileID: 11400000, guid: 3d904e82a1e1cb54694f3f7d21397018, type: 2}
-  - {fileID: 11400000, guid: 730434c52f0163a468eb8390afd58057, type: 2}
-  - {fileID: 11400000, guid: ae2923373718c6348b584ef46ee84309, type: 2}
-  - {fileID: 11400000, guid: b8ac975af1fbf4a48bafd3a1a2a7ab30, type: 2}
-  - {fileID: 11400000, guid: 1f68b92e8b578f340a701bc3363e6fd1, type: 2}
-  - {fileID: 11400000, guid: bbc1ea442f8213641ab59430188f5a7e, type: 2}
-  - {fileID: 11400000, guid: 4b7cbbc0c6d9b8846890ec0f38234582, type: 2}
-  - {fileID: 11400000, guid: f8e06fd7587758e4cbbda1adff50eef4, type: 2}
-  - {fileID: 11400000, guid: d71728268a52c654c87e9e3cdf736a22, type: 2}
-  - {fileID: 11400000, guid: 5289d96af5b2da0418bbf0cd4f4e59ca, type: 2}
-  - {fileID: 11400000, guid: d8ddc8b0c299ee74a9a31d3bfbf6f185, type: 2}
+  isInConstructor: 0
+  grid: {fileID: 0}
+  levelNameField: {fileID: 0}
+  levelNameTextInputField: {fileID: 0}
+  SavingLevelUI: {fileID: 0}
+  loadLevelButton: {fileID: 0}
+  errorField: {fileID: 0}
+  errorUI: {fileID: 0}
+  selectedTileImage: {fileID: 0}
+  tiles: []
   tilemaps:
   - {fileID: 0}
   - {fileID: 0}

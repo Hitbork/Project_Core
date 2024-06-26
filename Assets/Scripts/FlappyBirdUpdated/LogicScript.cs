@@ -61,6 +61,9 @@ namespace FlappyBirdUpdated
 
         public void FinishGame()
         {
+            if (player == null)
+                SetPlayerGO();
+
             PlayerScript playerScript = player.GetComponent<PlayerScript>();
 
             if (!playerScript.birdIsAlive) return;
@@ -85,12 +88,17 @@ namespace FlappyBirdUpdated
             // Showing current time
             currentTimeTxt.GetComponent<TMP_Text>().text = $"Current time: {System.Math.Round(timer, 2).ToString("0.00", CultureInfo.InvariantCulture)}";
 
-            // Showing time record
-            timeRecordTxt.GetComponent<TMP_Text>().text = $"Time record: {System.Math.Round(userData.timeRecordsInLevels[GetLevelNumber() - 1], 2).ToString("0.00", CultureInfo.InvariantCulture)}!";
-
-            // Toggling off "play next level" button if it is last level
-            if (GetLevelNumber() == 9)
-                playNextLevelButton.SetActive(false);
+            if (isInLevelConstructor)
+            {
+                timeRecordTxt.SetActive(false);
+            } else
+            {
+                // Showing time record
+                timeRecordTxt.GetComponent<TMP_Text>().text = $"Time record: {System.Math.Round(userData.timeRecordsInLevels[GetLevelNumber() - 1], 2).ToString("0.00", CultureInfo.InvariantCulture)}!";
+                // Toggling off "play next level" button if it is last level
+                if (GetLevelNumber() == 9)
+                    playNextLevelButton.SetActive(false);
+            }
         }
 
         private int GetLevelNumber()
@@ -138,6 +146,13 @@ namespace FlappyBirdUpdated
             {
                 Debug.Log("SomeManager hasn't found the playerGO");
             }
+        }
+
+        public void StartGame()
+        {
+            isGameEnded = false;
+
+            timer = 0;
         }
 
         public void SetBounceDirection(string BNESLogic)
