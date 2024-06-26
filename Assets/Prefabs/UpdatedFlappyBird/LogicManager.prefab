@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7451167248810840166
 Transform:
   m_ObjectHideFlags: 0
@@ -52,3 +52,5 @@ MonoBehaviour:
   playNextLevelButton: {fileID: 0}
   currentTimeTxt: {fileID: 0}
   timeRecordTxt: {fileID: 0}
+  velocityOfBNES: 15
+  player: {fileID: 0}
