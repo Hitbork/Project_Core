@@ -4,11 +4,16 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using LoadSceneData.User;
 using System.Globalization;
+using UnityEngine.Events;
+using System.Collections.Generic;
+using UnityEngine.Tilemaps;
 
 namespace FlappyBirdUpdated
 {
     public class LogicScript : MonoBehaviour
     {
+        public static LogicScript instance;
+
         UserData userData = new UserData();
 
         public bool isInLevelConstructor = false;
@@ -25,8 +30,30 @@ namespace FlappyBirdUpdated
         private double timer = 0;
         private Vector2 bounceDirection = new Vector2(-20, -20);
 
+        public Dictionary<int, UnityAction> tileActions = new Dictionary<int, UnityAction>()
+        {
+            [1] = GameOver,
+            [2] = FinishGame,
+            [3] = BouncePlayer
+        };
+
+        public enum Actions
+        {
+            GameOver = 1,
+            FinishGame = 2,
+            BouncePlayer = 3
+        }
+        public static void GameOver() => instance.GameOver(true);
+
+        public static void FinishGame() => instance.FinishGame(true);
+
+        public static void BouncePlayer() => instance.BouncePlayer(true);
+
         private void Start()
         {
+            if (instance == null) instance = this;
+            else Destroy(this);
+
             userData.Load();
 
             isInLevelConstructor = SceneManager.GetActiveScene().name == "LevelConstructor";
@@ -45,24 +72,79 @@ namespace FlappyBirdUpdated
                 if (Input.GetKeyDown(KeyCode.R)) RestartGame();
         }
 
+        private CustomTile GetCustomTile(GameObject tilemapGameObject, Vector3 vector)
+        {
+            Tilemap currentTilemap = tilemapGameObject.GetComponent<Tilemap>();
+            TileBase tileBase = currentTilemap.GetTile(currentTilemap.WorldToCell(vector));
+            CustomTile currentCustomTile = CustomTileManager.instance.tiles[1];
+
+            foreach (CustomTile customTile in CustomTileManager.instance.tiles)
+            {
+                if (customTile.tile == tileBase)
+                {
+                    currentCustomTile = customTile;
+                }
+            }
+
+            if (tileBase == null) Debug.Log("Tilebase hasn't been found!");
+
+            return currentCustomTile;
+        }
+
+        public UnityAction GetTileAction(int num)
+        {
+            return tileActions[num];
+        }
+
         [ContextMenu("Increase Score")]
         public void UpdateTime() => scoreText.text = System.Math.Round(timer, 2).ToString("0.00", CultureInfo.InvariantCulture);
 
         public void RestartGame() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
-        public void GameOver()
+        public void GameOver(bool flag)
         {
-            isGameEnded = true;
+            if (isInLevelConstructor) CheckForPlayerInstance();
 
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().SetBirdUnactive();
+            isGameEnded = flag;
 
-            gameOverScreen.SetActive(true);
+            player.GetComponent<PlayerScript>().SetBirdUnactive();
+
+            gameOverScreen.SetActive(flag);
         }
 
-        public void FinishGame()
+        public void GetEvent(Collision2D collision, out UnityEvent unityEvent)
         {
-            if (player == null)
-                SetPlayerGO();
+            // Defyning unity event
+            unityEvent = new UnityEvent();
+
+            // Defining contact point of collision
+
+            foreach (ContactPoint2D contact in collision.contacts)
+            {
+                Vector3 contactVector = Vector3.zero;
+
+                contactVector.x = contact.point.x - 0.01f * contact.normal.x;
+                contactVector.y = contact.point.y - 0.01f * contact.normal.y;
+
+                CustomTile customTile = GetCustomTile(collision.gameObject, contactVector);
+
+                if (customTile.isBouncable)
+                    SetBounceDirection(customTile.xBounceableDirection, customTile.yBounceableDirection);
+
+                try
+                {
+                    unityEvent.AddListener(GetTileAction((int)customTile.action));
+                }
+                catch
+                {
+                    Debug.Log($"Tile {customTile.id} hasn't any action!");
+                }
+            }
+        }
+
+        public void FinishGame(bool flag)
+        {
+            if (isInLevelConstructor) CheckForPlayerInstance();
 
             PlayerScript playerScript = player.GetComponent<PlayerScript>();
 
@@ -111,12 +193,17 @@ namespace FlappyBirdUpdated
             return (int)char.GetNumericValue(currentSceneName[currentSceneName.Length - 1]);
         }
 
-        public void BouncePlayer()
+        public void BouncePlayer(bool flag)
+        {
+            if (isInLevelConstructor) CheckForPlayerInstance();
+
+            player.GetComponent<Rigidbody2D>().velocity = bounceDirection;
+        }
+
+        private void CheckForPlayerInstance()
         {
             if (player == null)
                 SetPlayerGO();
-
-            player.GetComponent<Rigidbody2D>().velocity = bounceDirection;
         }
 
         public void Contact() => Debug.Log("There is a contact with non-killing object");
@@ -155,43 +242,22 @@ namespace FlappyBirdUpdated
             timer = 0;
         }
 
-        public void SetBounceDirection(string BNESLogic)
+        public void SetBounceDirection(int x, int y)
         {
-            float x = 0, y = 0;
+            float currentX = 0;
+            float currentY = 0;
 
-            switch (BNESLogic)
-            {
-                case "U":
-                    y = velocityOfBNES;
-                    break;
-                case "UR":
-                    x = velocityOfBNES;
-                    y = velocityOfBNES;
-                    break;
-                case "R":
-                    x = velocityOfBNES;
-                    break;
-                case "DR":
-                    x = velocityOfBNES;
-                    y = -1 * velocityOfBNES;
-                    break;
-                case "D":
-                    y = -1 * velocityOfBNES;
-                    break;
-                case "DL":
-                    x = -1 * velocityOfBNES;
-                    y = -1 * velocityOfBNES;
-                    break;
-                case "L":
-                    x = -1 * velocityOfBNES;
-                    break;
-                case "UL":
-                    x = -1 * velocityOfBNES;
-                    y = velocityOfBNES;
-                    break;
-            }
+            if (x < 0)
+                currentX = -1 * velocityOfBNES;
+            else if (x > 0)
+                currentX = velocityOfBNES;
 
-            bounceDirection = new Vector2(x, y);
+            if (y < 0)
+                currentY = -1 * velocityOfBNES;
+            else if (y > 0)
+                currentY = velocityOfBNES;
+
+            bounceDirection = new Vector2(currentX, currentY);
         }
 
         public void OpenLevelsMenu() => SceneManager.LoadScene("LevelsMenu");

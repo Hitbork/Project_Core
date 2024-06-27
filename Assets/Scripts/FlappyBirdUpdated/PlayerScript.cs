@@ -12,16 +12,12 @@ namespace FlappyBirdUpdated
     {
         public Rigidbody2D myRigidBody2D;
         public float speed = 5.0f;
-        public LogicScript logic;
         public bool birdIsAlive { get; private set; } = true;
-        [SerializeField] public SomeManager someManager;
 
         // Start is called before the first frame update
         void Start()
         {
-            someManager = GameObject.Find("SomeManager").GetComponent<SomeManager>();
-            logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
-            if (logic.isInLevelConstructor) logic.StartGame();
+            if (LogicScript.instance.isInLevelConstructor) LogicScript.instance.StartGame();
             myRigidBody2D.velocity = Vector2.right * speed;
         }
 
@@ -54,9 +50,9 @@ namespace FlappyBirdUpdated
             // All other collision logics are written in their scripts
             if (collision.gameObject.tag == "GroundLayer" && birdIsAlive)
             {
-                someManager.GetEvent(collision, out UnityEvent currentEvent);
+                LogicScript.instance.GetEvent(collision, out UnityEvent currentEvent);
 
-                currentEvent.Invoke();
+                currentEvent?.Invoke();
             }
         }
 
@@ -64,9 +60,9 @@ namespace FlappyBirdUpdated
         {
             UnityEvent currentEvent = new UnityEvent();
 
-            currentEvent.AddListener(logic.FinishGame);
+            currentEvent.AddListener(LogicScript.FinishGame);
 
-            currentEvent.Invoke();
+            currentEvent?.Invoke();
         }
     }
 }

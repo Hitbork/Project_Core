@@ -16,4 +16,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 0c8c5f44bb09913469e7f30df486c1bb, type: 3}
   id: DeathGround
   tilemap: 50
-  logic: D
+  action: 1
+  isBouncable: 0
+  xBounceableDirection: 0
+  yBounceableDirection: 0

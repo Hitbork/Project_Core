@@ -51,7 +51,7 @@ public class FinishLineScript : MonoBehaviour
         if (birdUpdatedScript.birdIsAlive)
         {
             birdUpdatedScript.SetBirdUnactive();
-            logic.FinishGame();
+            LogicScript.FinishGame();
         }
     }
 }

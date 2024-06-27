@@ -16,4 +16,7 @@ MonoBehaviour:
   sprite: {fileID: -1463243038, guid: 87f5e774f757246478a7742adfa9001f, type: 3}
   id: BounceNESLeft
   tilemap: 50
-  logic: BNESL
+  action: 3
+  isBouncable: 1
+  xBounceableDirection: -1
+  yBounceableDirection: 0
