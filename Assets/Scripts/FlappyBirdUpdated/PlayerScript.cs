@@ -42,8 +42,6 @@ namespace FlappyBirdUpdated
             }
         }
 
-        public void SetBirdUnactive() => birdIsAlive = false;
-
         private void OnCollisionEnter2D(Collision2D collision)
         {
             // Check if collision was collision of gameobject with GroundLayer tag.
@@ -64,5 +62,7 @@ namespace FlappyBirdUpdated
 
             currentEvent?.Invoke();
         }
+
+        public void SetBirdUnactive() => birdIsAlive = false;
     }
 }

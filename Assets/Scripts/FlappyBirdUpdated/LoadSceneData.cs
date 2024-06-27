@@ -28,20 +28,6 @@ namespace LoadSceneData
 
         public abstract void ReadSavingInfo();
 
-        public void ClearSavingData() => savingData = new SavingData();
-
-        public virtual void Save()
-        {
-            ClearSavingData();
-            AddSavingInfo();
-
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Create(Application.persistentDataPath + $"/{nameOfSavingFile}.dat");
-            bf.Serialize(file, this.savingData);
-            file.Close();
-            Debug.Log($"File {nameOfSavingFile}.dat was saved!");
-        }
-
         public virtual void Load()
         {
             ClearSavingData();
@@ -56,7 +42,21 @@ namespace LoadSceneData
 
             ReadSavingInfo();
         }
-        
+
+        public virtual void Save()
+        {
+            ClearSavingData();
+            AddSavingInfo();
+
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Create(Application.persistentDataPath + $"/{nameOfSavingFile}.dat");
+            bf.Serialize(file, this.savingData);
+            file.Close();
+            Debug.Log($"File {nameOfSavingFile}.dat was saved!");
+        }
+
+        public void ClearSavingData() => savingData = new SavingData();
+
         public SavingClass()
         {
             ChangeNameOfSavingFile();
@@ -111,18 +111,11 @@ namespace LoadSceneData
                 this.userName = name;
                 this.userPassword = password;
             }
-
-            public void LevelFinished(int finishedLevelIndex)
+            private void CheckForNewRecord(double currentTime, int indexOfLevel)
             {
-                CheckForOpeningNewLevel(finishedLevelIndex);
-                this.Save();
-            }
+                this.isNewRecordSetted = this.timeRecordsInLevels[indexOfLevel] > currentTime || this.timeRecordsInLevels[indexOfLevel] == 0;
 
-            public void LevelFinished(int finishedLevelIndex, double currentTime)
-            {
-                LevelFinished(finishedLevelIndex);
-                CheckForNewRecord(currentTime, finishedLevelIndex);
-                this.Save();
+                if (isNewRecordSetted) this.timeRecordsInLevels[indexOfLevel] = currentTime;
             }
 
             private void CheckForOpeningNewLevel(int indexOfLevel)
@@ -131,12 +124,6 @@ namespace LoadSceneData
                     this.indexOfLastUncoveredLevel++;
             }
 
-            private void CheckForNewRecord(double currentTime, int indexOfLevel)
-            {
-                this.isNewRecordSetted = this.timeRecordsInLevels[indexOfLevel] > currentTime || this.timeRecordsInLevels[indexOfLevel] == 0;
-
-                if (isNewRecordSetted) this.timeRecordsInLevels[indexOfLevel] = currentTime;
-            }
 
             public override void AddSavingInfo()
             {
@@ -159,6 +146,19 @@ namespace LoadSceneData
                 this.userPassword = this.savingData.strings[1];
                 this.indexOfLastUncoveredLevel = this.savingData.ints[0];
                 this.timeRecordsInLevels = this.savingData.doubleArrays[0];
+            }
+
+            public void LevelFinished(int finishedLevelIndex)
+            {
+                CheckForOpeningNewLevel(finishedLevelIndex);
+                this.Save();
+            }
+
+            public void LevelFinished(int finishedLevelIndex, double currentTime)
+            {
+                LevelFinished(finishedLevelIndex);
+                CheckForNewRecord(currentTime, finishedLevelIndex);
+                this.Save();
             }
         }
     }
@@ -194,6 +194,22 @@ namespace LoadSceneData
 
             public class LevelName
             {
+                private static int minLength = 3, maxLength = 16;
+
+                private static string defaultLevelName = "unknown";
+
+                private string value;
+
+                public bool isDefault { get; private set; } = false;
+
+                public bool isEmpty { get; private set; } = false;
+
+                public bool isIncorrect { get; private set; } = false;
+
+                public bool isLengthIncorrect { get; private set; } = false;
+
+                public string errorMessage { get; private set; } = string.Empty;
+
                 public string Value
                 {
                     get => this.value;
@@ -207,21 +223,6 @@ namespace LoadSceneData
                     }
                 }
 
-                public bool isIncorrect { get; private set; } = false;
-
-                public bool isDefault { get; private set; } = false;
-
-                public bool isEmpty { get; private set; } = false;
-
-                public bool isLengthIncorrect { get; private set; } = false;
-
-                private string value;
-                public string errorMessage { get; private set; } = string.Empty;
-
-                private static int minLength = 3, maxLength = 16;
-
-                private static string defaultLevelName = "unknown";
-
                 public LevelName() 
                 {
                     SetDefault();
@@ -231,16 +232,6 @@ namespace LoadSceneData
                 {
                     this.Value = strValue;
                 }
-
-                public void SetDefault()
-                {
-                    isIncorrect = true;
-                    isDefault = true;
-                    this.errorMessage = $"Level name can't be {defaultLevelName}!";
-                    this.value = defaultLevelName;
-                }
-
-                private void ClearErrorMessage() => errorMessage = string.Empty;
 
                 private bool IsDefault()
                 {
@@ -253,6 +244,20 @@ namespace LoadSceneData
                         isDefault = false;
 
                     return isDefault;
+                }
+
+                private bool IsEmpty()
+                {
+                    if (string.IsNullOrEmpty(this.value) ||
+                        string.IsNullOrWhiteSpace(this.value))
+                    {
+                        isEmpty = true;
+                        this.errorMessage = "Level name is empty!";
+                    }
+                    else
+                        isEmpty = false;
+
+                    return isEmpty;
                 }
 
                 private bool IsLengthIncorrect()
@@ -272,28 +277,21 @@ namespace LoadSceneData
                     return isLengthIncorrect;
                 }
 
-                private bool IsEmpty()
-                {
-                    if (string.IsNullOrEmpty(this.value) ||
-                        string.IsNullOrWhiteSpace(this.value))
-                    {
-                        isEmpty = true;
-                        this.errorMessage = "Level name is empty!";
-                    }
-                    else
-                        isEmpty = false;
+                private void CheckForCorrectness() => isIncorrect = IsEmpty() || this.IsDefault() || this.IsLengthIncorrect();
 
-                    return isEmpty;
-                }
-
-                private void CheckForCorrectness()
-                {
-                    isIncorrect = IsEmpty() || this.IsDefault() || this.IsLengthIncorrect();
-                }
+                private void ClearErrorMessage() => errorMessage = string.Empty;
 
                 public string GetErrorMessage()
                 {
                     return this.errorMessage;
+                }
+
+                public void SetDefault()
+                {
+                    isIncorrect = true;
+                    isDefault = true;
+                    this.errorMessage = $"Level name can't be {defaultLevelName}!";
+                    this.value = defaultLevelName;
                 }
             }
         }

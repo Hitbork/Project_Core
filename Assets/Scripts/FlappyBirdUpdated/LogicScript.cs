@@ -30,7 +30,7 @@ namespace FlappyBirdUpdated
         private double timer = 0;
         private Vector2 bounceDirection = new Vector2(-20, -20);
 
-        public Dictionary<int, UnityAction> tileActions = new Dictionary<int, UnityAction>()
+        public static Dictionary<int, UnityAction> tileActions = new Dictionary<int, UnityAction>()
         {
             [1] = GameOver,
             [2] = FinishGame,
@@ -43,13 +43,8 @@ namespace FlappyBirdUpdated
             FinishGame = 2,
             BouncePlayer = 3
         }
-        public static void GameOver() => instance.GameOver(true);
-
-        public static void FinishGame() => instance.FinishGame(true);
-
-        public static void BouncePlayer() => instance.BouncePlayer(true);
-
-        private void Start()
+        
+        void Start()
         {
             if (instance == null) instance = this;
             else Destroy(this);
@@ -61,7 +56,7 @@ namespace FlappyBirdUpdated
             SetPlayerGO();
         }
 
-        private void Update()
+        void Update()
         {
             timer += Time.deltaTime;
 
@@ -71,6 +66,12 @@ namespace FlappyBirdUpdated
             if (!isInLevelConstructor)
                 if (Input.GetKeyDown(KeyCode.R)) RestartGame();
         }
+
+        public static void GameOver() => instance.GameOver(true);
+
+        public static void FinishGame() => instance.FinishGame(true);
+
+        public static void BouncePlayer() => instance.BouncePlayer(true);
 
         private CustomTile GetCustomTile(GameObject tilemapGameObject, Vector3 vector)
         {
@@ -91,15 +92,89 @@ namespace FlappyBirdUpdated
             return currentCustomTile;
         }
 
+        private int GetLevelNumber()
+        {
+            // This method is used while playing default levels
+            // Getting current scene name
+            string currentSceneName = SceneManager.GetActiveScene().name;
+
+            // Trimming last digit from current scene name 
+            return (int)char.GetNumericValue(currentSceneName[currentSceneName.Length - 1]);
+        }
+
+        private void ActivateFinishScreen()
+        {
+            gameFinishScreen.SetActive(true);
+
+            // Showing current time
+            currentTimeTxt.GetComponent<TMP_Text>().text = $"Current time: {System.Math.Round(timer, 2).ToString("0.00", CultureInfo.InvariantCulture)}";
+
+            if (isInLevelConstructor)
+            {
+                timeRecordTxt.SetActive(false);
+            }
+            else
+            {
+                // Showing time record
+                timeRecordTxt.GetComponent<TMP_Text>().text = $"Time record: {System.Math.Round(userData.timeRecordsInLevels[GetLevelNumber() - 1], 2).ToString("0.00", CultureInfo.InvariantCulture)}!";
+                // Toggling off "play next level" button if it is last level
+                if (GetLevelNumber() == 9)
+                    playNextLevelButton.SetActive(false);
+            }
+        }
+
+        private void CheckForPlayerInstance()
+        {
+            if (player == null)
+                SetPlayerGO();
+        }
+
+        private void SetPlayerGO()
+        {
+            try
+            {
+                player = GameObject.FindGameObjectWithTag("Player");
+            }
+            catch
+            {
+                Debug.Log("SomeManager hasn't found the playerGO");
+            }
+        }
+
         public UnityAction GetTileAction(int num)
         {
             return tileActions[num];
         }
 
-        [ContextMenu("Increase Score")]
-        public void UpdateTime() => scoreText.text = System.Math.Round(timer, 2).ToString("0.00", CultureInfo.InvariantCulture);
+        public void BouncePlayer(bool flag)
+        {
+            if (isInLevelConstructor) CheckForPlayerInstance();
 
-        public void RestartGame() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            player.GetComponent<Rigidbody2D>().velocity = bounceDirection;
+        }
+
+        public void Contact() => Debug.Log("There is a contact with non-killing object");
+
+        public void FinishGame(bool flag)
+        {
+            if (isInLevelConstructor) CheckForPlayerInstance();
+
+            PlayerScript playerScript = player.GetComponent<PlayerScript>();
+
+            if (!playerScript.birdIsAlive) return;
+
+            isGameEnded = true;
+            playerScript.SetBirdUnactive();
+
+            if (!isInLevelConstructor)
+            {
+                int indexOfCurrentLevel = GetLevelNumber() - 1;
+
+                userData.LevelFinished(indexOfCurrentLevel, timer);
+            }
+
+            ActivateFinishScreen();
+        }
 
         public void GameOver(bool flag)
         {
@@ -142,71 +217,9 @@ namespace FlappyBirdUpdated
             }
         }
 
-        public void FinishGame(bool flag)
-        {
-            if (isInLevelConstructor) CheckForPlayerInstance();
+        public void OpenLevelsMenu() => SceneManager.LoadScene("LevelsMenu");
 
-            PlayerScript playerScript = player.GetComponent<PlayerScript>();
-
-            if (!playerScript.birdIsAlive) return;
-
-            isGameEnded = true;
-            playerScript.SetBirdUnactive();
-
-            if (!isInLevelConstructor)
-            {
-                int indexOfCurrentLevel = GetLevelNumber() - 1;
-
-                userData.LevelFinished(indexOfCurrentLevel, timer);
-            }
-
-            ActivateFinishScreen();
-        }
-
-        private void ActivateFinishScreen()
-        {
-            gameFinishScreen.SetActive(true);
-
-            // Showing current time
-            currentTimeTxt.GetComponent<TMP_Text>().text = $"Current time: {System.Math.Round(timer, 2).ToString("0.00", CultureInfo.InvariantCulture)}";
-
-            if (isInLevelConstructor)
-            {
-                timeRecordTxt.SetActive(false);
-            } else
-            {
-                // Showing time record
-                timeRecordTxt.GetComponent<TMP_Text>().text = $"Time record: {System.Math.Round(userData.timeRecordsInLevels[GetLevelNumber() - 1], 2).ToString("0.00", CultureInfo.InvariantCulture)}!";
-                // Toggling off "play next level" button if it is last level
-                if (GetLevelNumber() == 9)
-                    playNextLevelButton.SetActive(false);
-            }
-        }
-
-        private int GetLevelNumber()
-        {
-            // This method is used while playing default levels
-            // Getting current scene name
-            string currentSceneName = SceneManager.GetActiveScene().name;
-
-            // Trimming last digit from current scene name 
-            return (int)char.GetNumericValue(currentSceneName[currentSceneName.Length - 1]);
-        }
-
-        public void BouncePlayer(bool flag)
-        {
-            if (isInLevelConstructor) CheckForPlayerInstance();
-
-            player.GetComponent<Rigidbody2D>().velocity = bounceDirection;
-        }
-
-        private void CheckForPlayerInstance()
-        {
-            if (player == null)
-                SetPlayerGO();
-        }
-
-        public void Contact() => Debug.Log("There is a contact with non-killing object");
+        public void OpenMainMenu() => SceneManager.LoadScene("MainMenu");
 
         public void PlayNextLevel()
         {
@@ -223,24 +236,7 @@ namespace FlappyBirdUpdated
             SceneManager.LoadScene(nextLevelSceneName);
         }
 
-        private void SetPlayerGO()
-        {
-            try
-            {
-                player = GameObject.FindGameObjectWithTag("Player");
-            }
-            catch
-            {
-                Debug.Log("SomeManager hasn't found the playerGO");
-            }
-        }
-
-        public void StartGame()
-        {
-            isGameEnded = false;
-
-            timer = 0;
-        }
+        public void RestartGame() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
         public void SetBounceDirection(int x, int y)
         {
@@ -260,9 +256,14 @@ namespace FlappyBirdUpdated
             bounceDirection = new Vector2(currentX, currentY);
         }
 
-        public void OpenLevelsMenu() => SceneManager.LoadScene("LevelsMenu");
+        public void StartGame()
+        {
+            isGameEnded = false;
 
-        public void OpenMainMenu() => SceneManager.LoadScene("MainMenu");
+            timer = 0;
+        }
+
+        public void UpdateTime() => scoreText.text = System.Math.Round(timer, 2).ToString("0.00", CultureInfo.InvariantCulture);
     }
 }
 
